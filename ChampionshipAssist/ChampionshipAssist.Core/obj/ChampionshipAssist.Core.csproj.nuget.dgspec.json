@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\ChampionshipAssist\\lab-1-championshipassist\\ChampionshipAssist\\ChampionshipAssist.Core\\ChampionshipAssist.Core.csproj": {}
+    "E:\\Desktop\\lab1\\ChampionshipAssist\\ChampionshipAssist.Core\\ChampionshipAssist.Core.csproj": {}
   },
   "projects": {
-    "D:\\ChampionshipAssist\\lab-1-championshipassist\\ChampionshipAssist\\ChampionshipAssist.Core\\ChampionshipAssist.Core.csproj": {
+    "E:\\Desktop\\lab1\\ChampionshipAssist\\ChampionshipAssist.Core\\ChampionshipAssist.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\ChampionshipAssist\\lab-1-championshipassist\\ChampionshipAssist\\ChampionshipAssist.Core\\ChampionshipAssist.Core.csproj",
+        "projectUniqueName": "E:\\Desktop\\lab1\\ChampionshipAssist\\ChampionshipAssist.Core\\ChampionshipAssist.Core.csproj",
         "projectName": "ChampionshipAssist.Core",
-        "projectPath": "D:\\ChampionshipAssist\\lab-1-championshipassist\\ChampionshipAssist\\ChampionshipAssist.Core\\ChampionshipAssist.Core.csproj",
-        "packagesPath": "C:\\Users\\Dima\\.nuget\\packages\\",
-        "outputPath": "D:\\ChampionshipAssist\\lab-1-championshipassist\\ChampionshipAssist\\ChampionshipAssist.Core\\obj\\",
+        "projectPath": "E:\\Desktop\\lab1\\ChampionshipAssist\\ChampionshipAssist.Core\\ChampionshipAssist.Core.csproj",
+        "packagesPath": "C:\\Users\\Eugene\\.nuget\\packages\\",
+        "outputPath": "E:\\Desktop\\lab1\\ChampionshipAssist\\ChampionshipAssist.Core\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Dima\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Eugene\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -61,7 +61,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     }

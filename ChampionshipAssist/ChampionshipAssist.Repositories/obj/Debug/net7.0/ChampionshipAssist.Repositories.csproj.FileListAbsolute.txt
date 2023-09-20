@@ -1,0 +1,15 @@
+E:\Desktop\lab1\ChampionshipAssist\ChampionshipAssist.Repositories\bin\Debug\net7.0\ChampionshipAssist.Repositories.deps.json
+E:\Desktop\lab1\ChampionshipAssist\ChampionshipAssist.Repositories\bin\Debug\net7.0\ChampionshipAssist.Repositories.dll
+E:\Desktop\lab1\ChampionshipAssist\ChampionshipAssist.Repositories\bin\Debug\net7.0\ChampionshipAssist.Repositories.pdb
+E:\Desktop\lab1\ChampionshipAssist\ChampionshipAssist.Repositories\bin\Debug\net7.0\ChampionshipAssist.Core.dll
+E:\Desktop\lab1\ChampionshipAssist\ChampionshipAssist.Repositories\bin\Debug\net7.0\ChampionshipAssist.Core.pdb
+E:\Desktop\lab1\ChampionshipAssist\ChampionshipAssist.Repositories\obj\Debug\net7.0\ChampionshipAssist.Repositories.csproj.AssemblyReference.cache
+E:\Desktop\lab1\ChampionshipAssist\ChampionshipAssist.Repositories\obj\Debug\net7.0\ChampionshipAssist.Repositories.GeneratedMSBuildEditorConfig.editorconfig
+E:\Desktop\lab1\ChampionshipAssist\ChampionshipAssist.Repositories\obj\Debug\net7.0\ChampionshipAssist.Repositories.AssemblyInfoInputs.cache
+E:\Desktop\lab1\ChampionshipAssist\ChampionshipAssist.Repositories\obj\Debug\net7.0\ChampionshipAssist.Repositories.AssemblyInfo.cs
+E:\Desktop\lab1\ChampionshipAssist\ChampionshipAssist.Repositories\obj\Debug\net7.0\ChampionshipAssist.Repositories.csproj.CoreCompileInputs.cache
+E:\Desktop\lab1\ChampionshipAssist\ChampionshipAssist.Repositories\obj\Debug\net7.0\ChampionshipAssist.Repositories.csproj.CopyComplete
+E:\Desktop\lab1\ChampionshipAssist\ChampionshipAssist.Repositories\obj\Debug\net7.0\ChampionshipAssist.Repositories.dll
+E:\Desktop\lab1\ChampionshipAssist\ChampionshipAssist.Repositories\obj\Debug\net7.0\refint\ChampionshipAssist.Repositories.dll
+E:\Desktop\lab1\ChampionshipAssist\ChampionshipAssist.Repositories\obj\Debug\net7.0\ChampionshipAssist.Repositories.pdb
+E:\Desktop\lab1\ChampionshipAssist\ChampionshipAssist.Repositories\obj\Debug\net7.0\ref\ChampionshipAssist.Repositories.dll

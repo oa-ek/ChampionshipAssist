@@ -1,20 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace ChampionshipAssist.Core.Entities
 {
     public class Tournament
     {
-        public int TournamentId { get; set; }
-        public string Name { get; set; }
-        public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
-        public string Rules { get; set; }
-        public bool IsOpenToAll { get; set; }
-        public List<User> Participants { get; set; }
-        public List<Review> Reviews { get; set; }
+        public int TournamentId { get; set; } // Ідентифікатор турніру
+        public string Name { get; set; } // Назва
+        public DateTime StartDate { get; set; } // Дата початку
+        public DateTime EndDate { get; set; } // Дата кінця
+        public string Rules { get; set; } // Правила
+        public bool IsOpenToAll { get; set; } // Відкритий для всіх?
+        public List<User> Participants { get; set; } // Учасники
+        public List<Review> Reviews { get; set; } // Відгуки
     }
 }
