@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace ChampionshipAssist.WebApp.Data
+namespace ChampionshipAssist.Core.Context
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ChampionsshipAssistDbContext : IdentityDbContext
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        public ChampionsshipAssistDbContext(DbContextOptions<ChampionsshipAssistDbContext> options)
             : base(options)
         {
         }
