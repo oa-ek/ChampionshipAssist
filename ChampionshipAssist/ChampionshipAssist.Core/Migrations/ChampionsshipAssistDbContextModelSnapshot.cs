@@ -31,21 +31,22 @@ namespace ChampionshipAssist.Core.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ReviewId"));
 
                     b.Property<string>("Commentary")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("Rating")
+                    b.Property<double?>("Rating")
                         .HasColumnType("float");
 
-                    b.Property<int>("TournamentId")
+                    b.Property<int?>("TournamentId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserId")
+                    b.Property<int?>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("ReviewId");
 
                     b.HasIndex("TournamentId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Reviews");
 
@@ -54,25 +55,19 @@ namespace ChampionshipAssist.Core.Migrations
                         {
                             ReviewId = 1,
                             Commentary = "Test1",
-                            Rating = 5.0,
-                            TournamentId = 1,
-                            UserId = 1
+                            Rating = 5.0
                         },
                         new
                         {
                             ReviewId = 2,
                             Commentary = "Test2",
-                            Rating = 4.0,
-                            TournamentId = 2,
-                            UserId = 2
+                            Rating = 4.0
                         },
                         new
                         {
                             ReviewId = 3,
                             Commentary = "Test3",
-                            Rating = 3.0,
-                            TournamentId = 3,
-                            UserId = 3
+                            Rating = 3.0
                         });
                 });
 
@@ -84,21 +79,19 @@ namespace ChampionshipAssist.Core.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TournamentId"));
 
-                    b.Property<DateTime>("EndDate")
+                    b.Property<DateTime?>("EndDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool>("IsOpenToAll")
+                    b.Property<bool?>("IsOpenToAll")
                         .HasColumnType("bit");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Rules")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("StartDate")
+                    b.Property<DateTime?>("StartDate")
                         .HasColumnType("datetime2");
 
                     b.HasKey("TournamentId");
@@ -109,29 +102,29 @@ namespace ChampionshipAssist.Core.Migrations
                         new
                         {
                             TournamentId = 1,
-                            EndDate = new DateTime(2023, 9, 21, 17, 0, 59, 428, DateTimeKind.Local).AddTicks(2338),
+                            EndDate = new DateTime(2023, 9, 21, 20, 11, 11, 376, DateTimeKind.Local).AddTicks(9015),
                             IsOpenToAll = true,
                             Name = "Test1",
                             Rules = "Test1",
-                            StartDate = new DateTime(2023, 9, 21, 17, 0, 59, 428, DateTimeKind.Local).AddTicks(2283)
+                            StartDate = new DateTime(2023, 9, 21, 20, 11, 11, 376, DateTimeKind.Local).AddTicks(8962)
                         },
                         new
                         {
                             TournamentId = 2,
-                            EndDate = new DateTime(2023, 9, 21, 17, 0, 59, 428, DateTimeKind.Local).AddTicks(2343),
+                            EndDate = new DateTime(2023, 9, 21, 20, 11, 11, 376, DateTimeKind.Local).AddTicks(9022),
                             IsOpenToAll = true,
                             Name = "Test2",
                             Rules = "Test1",
-                            StartDate = new DateTime(2023, 9, 21, 17, 0, 59, 428, DateTimeKind.Local).AddTicks(2342)
+                            StartDate = new DateTime(2023, 9, 21, 20, 11, 11, 376, DateTimeKind.Local).AddTicks(9020)
                         },
                         new
                         {
                             TournamentId = 3,
-                            EndDate = new DateTime(2023, 9, 21, 17, 0, 59, 428, DateTimeKind.Local).AddTicks(2347),
+                            EndDate = new DateTime(2023, 9, 21, 20, 11, 11, 376, DateTimeKind.Local).AddTicks(9027),
                             IsOpenToAll = true,
                             Name = "Test3",
                             Rules = "Test1",
-                            StartDate = new DateTime(2023, 9, 21, 17, 0, 59, 428, DateTimeKind.Local).AddTicks(2346)
+                            StartDate = new DateTime(2023, 9, 21, 20, 11, 11, 376, DateTimeKind.Local).AddTicks(9025)
                         });
                 });
 
@@ -144,30 +137,21 @@ namespace ChampionshipAssist.Core.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserId"));
 
                     b.Property<string>("Documents")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsAdmin")
                         .HasColumnType("bit");
 
                     b.Property<string>("Password")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SteamLink")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("TournamentId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Username")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("UserId");
-
-                    b.HasIndex("TournamentId");
 
                     b.ToTable("Users");
 
@@ -381,20 +365,35 @@ namespace ChampionshipAssist.Core.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("ChampionshipAssist.Core.Entities.Review", b =>
+            modelBuilder.Entity("TournamentUser", b =>
                 {
-                    b.HasOne("ChampionshipAssist.Core.Entities.Tournament", null)
-                        .WithMany("Reviews")
-                        .HasForeignKey("TournamentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<int>("ParticipantsUserId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TournamentsTournamentId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ParticipantsUserId", "TournamentsTournamentId");
+
+                    b.HasIndex("TournamentsTournamentId");
+
+                    b.ToTable("TournamentUser");
                 });
 
-            modelBuilder.Entity("ChampionshipAssist.Core.Entities.User", b =>
+            modelBuilder.Entity("ChampionshipAssist.Core.Entities.Review", b =>
                 {
-                    b.HasOne("ChampionshipAssist.Core.Entities.Tournament", null)
-                        .WithMany("Participants")
-                        .HasForeignKey("TournamentId");
+                    b.HasOne("ChampionshipAssist.Core.Entities.Tournament", "Tournament")
+                        .WithMany("Reviews")
+                        .HasForeignKey("TournamentId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("ChampionshipAssist.Core.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("Tournament");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -448,10 +447,23 @@ namespace ChampionshipAssist.Core.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("TournamentUser", b =>
+                {
+                    b.HasOne("ChampionshipAssist.Core.Entities.User", null)
+                        .WithMany()
+                        .HasForeignKey("ParticipantsUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ChampionshipAssist.Core.Entities.Tournament", null)
+                        .WithMany()
+                        .HasForeignKey("TournamentsTournamentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("ChampionshipAssist.Core.Entities.Tournament", b =>
                 {
-                    b.Navigation("Participants");
-
                     b.Navigation("Reviews");
                 });
 #pragma warning restore 612, 618

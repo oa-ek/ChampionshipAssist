@@ -6,7 +6,9 @@ namespace ChampionshipAssist.Core.Context
 {
     public class ChampionsshipAssistDbContext : IdentityDbContext
     {
-        public ChampionsshipAssistDbContext() { }
+        public ChampionsshipAssistDbContext() 
+        {
+        }
         public ChampionsshipAssistDbContext(DbContextOptions<ChampionsshipAssistDbContext> options)
             : base(options)
         {
@@ -18,12 +20,21 @@ namespace ChampionshipAssist.Core.Context
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=DESKTOP-3E83AFL\\SQLEXPRESS;Database=JetEduDb;Integrated Security=True;Encrypt=True;TrustServerCertificate=True");
+            optionsBuilder.UseSqlServer("Server=DESKTOP-3E83AFL\\SQLEXPRESS;Database=ChampionsshipAssistDB;Integrated Security=True;Encrypt=True;TrustServerCertificate=True");
             base.OnConfiguring(optionsBuilder);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+            modelBuilder.Entity<Tournament>()
+                .HasMany(x => x.Reviews)
+                .WithOne(x => x.Tournament).OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<Tournament>()
+                .HasMany(x => x.Participants)
+                .WithMany(x => x.Tournaments);
+
             modelBuilder.Seed();
 
             base.OnModelCreating(modelBuilder);

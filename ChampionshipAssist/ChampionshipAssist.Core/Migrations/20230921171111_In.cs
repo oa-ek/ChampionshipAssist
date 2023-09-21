@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ChampionshipAssist.Core.Migrations
 {
     /// <inheritdoc />
-    public partial class Init : Migration
+    public partial class In : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -58,15 +58,32 @@ namespace ChampionshipAssist.Core.Migrations
                 {
                     TournamentId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Rules = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IsOpenToAll = table.Column<bool>(type: "bit", nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Rules = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsOpenToAll = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Tournaments", x => x.TournamentId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    UserId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Username = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SteamLink = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Documents = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsAdmin = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.UserId);
                 });
 
             migrationBuilder.CreateTable(
@@ -181,10 +198,10 @@ namespace ChampionshipAssist.Core.Migrations
                 {
                     ReviewId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    TournamentId = table.Column<int>(type: "int", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    Commentary = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Rating = table.Column<double>(type: "float", nullable: false)
+                    TournamentId = table.Column<int>(type: "int", nullable: true),
+                    UserId = table.Column<int>(type: "int", nullable: true),
+                    Commentary = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Rating = table.Column<double>(type: "float", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -193,31 +210,46 @@ namespace ChampionshipAssist.Core.Migrations
                         name: "FK_Reviews_Tournaments_TournamentId",
                         column: x => x.TournamentId,
                         principalTable: "Tournaments",
-                        principalColumn: "TournamentId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "TournamentId");
+                    table.ForeignKey(
+                        name: "FK_Reviews_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "UserId");
                 });
 
             migrationBuilder.CreateTable(
-                name: "Users",
+                name: "TournamentUser",
                 columns: table => new
                 {
-                    UserId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Username = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SteamLink = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Documents = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IsAdmin = table.Column<bool>(type: "bit", nullable: false),
-                    TournamentId = table.Column<int>(type: "int", nullable: true)
+                    ParticipantsUserId = table.Column<int>(type: "int", nullable: false),
+                    TournamentsTournamentId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Users", x => x.UserId);
+                    table.PrimaryKey("PK_TournamentUser", x => new { x.ParticipantsUserId, x.TournamentsTournamentId });
                     table.ForeignKey(
-                        name: "FK_Users_Tournaments_TournamentId",
-                        column: x => x.TournamentId,
+                        name: "FK_TournamentUser_Tournaments_TournamentsTournamentId",
+                        column: x => x.TournamentsTournamentId,
                         principalTable: "Tournaments",
-                        principalColumn: "TournamentId");
+                        principalColumn: "TournamentId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_TournamentUser_Users_ParticipantsUserId",
+                        column: x => x.ParticipantsUserId,
+                        principalTable: "Users",
+                        principalColumn: "UserId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "Reviews",
+                columns: new[] { "ReviewId", "Commentary", "Rating", "TournamentId", "UserId" },
+                values: new object[,]
+                {
+                    { 1, "Test1", 5.0, null, null },
+                    { 2, "Test2", 4.0, null, null },
+                    { 3, "Test3", 3.0, null, null }
                 });
 
             migrationBuilder.InsertData(
@@ -225,25 +257,15 @@ namespace ChampionshipAssist.Core.Migrations
                 columns: new[] { "TournamentId", "EndDate", "IsOpenToAll", "Name", "Rules", "StartDate" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2023, 9, 21, 17, 0, 59, 428, DateTimeKind.Local).AddTicks(2338), true, "Test1", "Test1", new DateTime(2023, 9, 21, 17, 0, 59, 428, DateTimeKind.Local).AddTicks(2283) },
-                    { 2, new DateTime(2023, 9, 21, 17, 0, 59, 428, DateTimeKind.Local).AddTicks(2343), true, "Test2", "Test1", new DateTime(2023, 9, 21, 17, 0, 59, 428, DateTimeKind.Local).AddTicks(2342) },
-                    { 3, new DateTime(2023, 9, 21, 17, 0, 59, 428, DateTimeKind.Local).AddTicks(2347), true, "Test3", "Test1", new DateTime(2023, 9, 21, 17, 0, 59, 428, DateTimeKind.Local).AddTicks(2346) }
+                    { 1, new DateTime(2023, 9, 21, 20, 11, 11, 376, DateTimeKind.Local).AddTicks(9015), true, "Test1", "Test1", new DateTime(2023, 9, 21, 20, 11, 11, 376, DateTimeKind.Local).AddTicks(8962) },
+                    { 2, new DateTime(2023, 9, 21, 20, 11, 11, 376, DateTimeKind.Local).AddTicks(9022), true, "Test2", "Test1", new DateTime(2023, 9, 21, 20, 11, 11, 376, DateTimeKind.Local).AddTicks(9020) },
+                    { 3, new DateTime(2023, 9, 21, 20, 11, 11, 376, DateTimeKind.Local).AddTicks(9027), true, "Test3", "Test1", new DateTime(2023, 9, 21, 20, 11, 11, 376, DateTimeKind.Local).AddTicks(9025) }
                 });
 
             migrationBuilder.InsertData(
                 table: "Users",
-                columns: new[] { "UserId", "Documents", "IsAdmin", "Password", "SteamLink", "TournamentId", "Username" },
-                values: new object[] { 1, "Test4", false, "Test2", "Test3", null, "Test1" });
-
-            migrationBuilder.InsertData(
-                table: "Reviews",
-                columns: new[] { "ReviewId", "Commentary", "Rating", "TournamentId", "UserId" },
-                values: new object[,]
-                {
-                    { 1, "Test1", 5.0, 1, 1 },
-                    { 2, "Test2", 4.0, 2, 2 },
-                    { 3, "Test3", 3.0, 3, 3 }
-                });
+                columns: new[] { "UserId", "Documents", "IsAdmin", "Password", "SteamLink", "Username" },
+                values: new object[] { 1, "Test4", false, "Test2", "Test3", "Test1" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -290,9 +312,14 @@ namespace ChampionshipAssist.Core.Migrations
                 column: "TournamentId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Users_TournamentId",
-                table: "Users",
-                column: "TournamentId");
+                name: "IX_Reviews_UserId",
+                table: "Reviews",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TournamentUser_TournamentsTournamentId",
+                table: "TournamentUser",
+                column: "TournamentsTournamentId");
         }
 
         /// <inheritdoc />
@@ -317,7 +344,7 @@ namespace ChampionshipAssist.Core.Migrations
                 name: "Reviews");
 
             migrationBuilder.DropTable(
-                name: "Users");
+                name: "TournamentUser");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -327,6 +354,9 @@ namespace ChampionshipAssist.Core.Migrations
 
             migrationBuilder.DropTable(
                 name: "Tournaments");
+
+            migrationBuilder.DropTable(
+                name: "Users");
         }
     }
 }
