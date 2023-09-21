@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Desktop\\lab1\\ChampionshipAssist\\ChampionshipAssist.Repositories\\ChampionshipAssist.Repositories.csproj": {}
+    "D:\\ChampionshipAssist\\Lab 1\\oa-ek\\ChampionshipAssist\\ChampionshipAssist\\ChampionshipAssist.Repositories\\ChampionshipAssist.Repositories.csproj": {}
   },
   "projects": {
-    "E:\\Desktop\\lab1\\ChampionshipAssist\\ChampionshipAssist.Core\\ChampionshipAssist.Core.csproj": {
+    "D:\\ChampionshipAssist\\Lab 1\\oa-ek\\ChampionshipAssist\\ChampionshipAssist\\ChampionshipAssist.Core\\ChampionshipAssist.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Desktop\\lab1\\ChampionshipAssist\\ChampionshipAssist.Core\\ChampionshipAssist.Core.csproj",
+        "projectUniqueName": "D:\\ChampionshipAssist\\Lab 1\\oa-ek\\ChampionshipAssist\\ChampionshipAssist\\ChampionshipAssist.Core\\ChampionshipAssist.Core.csproj",
         "projectName": "ChampionshipAssist.Core",
-        "projectPath": "E:\\Desktop\\lab1\\ChampionshipAssist\\ChampionshipAssist.Core\\ChampionshipAssist.Core.csproj",
-        "packagesPath": "C:\\Users\\Eugene\\.nuget\\packages\\",
-        "outputPath": "E:\\Desktop\\lab1\\ChampionshipAssist\\ChampionshipAssist.Core\\obj\\",
+        "projectPath": "D:\\ChampionshipAssist\\Lab 1\\oa-ek\\ChampionshipAssist\\ChampionshipAssist\\ChampionshipAssist.Core\\ChampionshipAssist.Core.csproj",
+        "packagesPath": "C:\\Users\\Dima\\.nuget\\packages\\",
+        "outputPath": "D:\\ChampionshipAssist\\Lab 1\\oa-ek\\ChampionshipAssist\\ChampionshipAssist\\ChampionshipAssist.Core\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Eugene\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Dima\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -61,21 +61,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "E:\\Desktop\\lab1\\ChampionshipAssist\\ChampionshipAssist.Repositories\\ChampionshipAssist.Repositories.csproj": {
+    "D:\\ChampionshipAssist\\Lab 1\\oa-ek\\ChampionshipAssist\\ChampionshipAssist\\ChampionshipAssist.Repositories\\ChampionshipAssist.Repositories.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Desktop\\lab1\\ChampionshipAssist\\ChampionshipAssist.Repositories\\ChampionshipAssist.Repositories.csproj",
+        "projectUniqueName": "D:\\ChampionshipAssist\\Lab 1\\oa-ek\\ChampionshipAssist\\ChampionshipAssist\\ChampionshipAssist.Repositories\\ChampionshipAssist.Repositories.csproj",
         "projectName": "ChampionshipAssist.Repositories",
-        "projectPath": "E:\\Desktop\\lab1\\ChampionshipAssist\\ChampionshipAssist.Repositories\\ChampionshipAssist.Repositories.csproj",
-        "packagesPath": "C:\\Users\\Eugene\\.nuget\\packages\\",
-        "outputPath": "E:\\Desktop\\lab1\\ChampionshipAssist\\ChampionshipAssist.Repositories\\obj\\",
+        "projectPath": "D:\\ChampionshipAssist\\Lab 1\\oa-ek\\ChampionshipAssist\\ChampionshipAssist\\ChampionshipAssist.Repositories\\ChampionshipAssist.Repositories.csproj",
+        "packagesPath": "C:\\Users\\Dima\\.nuget\\packages\\",
+        "outputPath": "D:\\ChampionshipAssist\\Lab 1\\oa-ek\\ChampionshipAssist\\ChampionshipAssist\\ChampionshipAssist.Repositories\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Eugene\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Dima\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -89,8 +89,8 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "E:\\Desktop\\lab1\\ChampionshipAssist\\ChampionshipAssist.Core\\ChampionshipAssist.Core.csproj": {
-                "projectPath": "E:\\Desktop\\lab1\\ChampionshipAssist\\ChampionshipAssist.Core\\ChampionshipAssist.Core.csproj"
+              "D:\\ChampionshipAssist\\Lab 1\\oa-ek\\ChampionshipAssist\\ChampionshipAssist\\ChampionshipAssist.Core\\ChampionshipAssist.Core.csproj": {
+                "projectPath": "D:\\ChampionshipAssist\\Lab 1\\oa-ek\\ChampionshipAssist\\ChampionshipAssist\\ChampionshipAssist.Core\\ChampionshipAssist.Core.csproj"
               }
             }
           }
@@ -120,7 +120,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     }

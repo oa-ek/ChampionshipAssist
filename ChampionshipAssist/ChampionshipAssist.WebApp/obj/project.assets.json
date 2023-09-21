@@ -3944,19 +3944,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Eugene\\.nuget\\packages\\": {}
+    "C:\\Users\\Dima\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\Desktop\\lab1\\ChampionshipAssist\\ChampionshipAssist.WebApp\\ChampionshipAssist.WebApp.csproj",
+      "projectUniqueName": "D:\\ChampionshipAssist\\Lab 1\\oa-ek\\ChampionshipAssist\\ChampionshipAssist\\ChampionshipAssist.WebApp\\ChampionshipAssist.WebApp.csproj",
       "projectName": "ChampionshipAssist.WebApp",
-      "projectPath": "E:\\Desktop\\lab1\\ChampionshipAssist\\ChampionshipAssist.WebApp\\ChampionshipAssist.WebApp.csproj",
-      "packagesPath": "C:\\Users\\Eugene\\.nuget\\packages\\",
-      "outputPath": "E:\\Desktop\\lab1\\ChampionshipAssist\\ChampionshipAssist.WebApp\\obj\\",
+      "projectPath": "D:\\ChampionshipAssist\\Lab 1\\oa-ek\\ChampionshipAssist\\ChampionshipAssist\\ChampionshipAssist.WebApp\\ChampionshipAssist.WebApp.csproj",
+      "packagesPath": "C:\\Users\\Dima\\.nuget\\packages\\",
+      "outputPath": "D:\\ChampionshipAssist\\Lab 1\\oa-ek\\ChampionshipAssist\\ChampionshipAssist\\ChampionshipAssist.WebApp\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Eugene\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Dima\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -3970,8 +3970,8 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "E:\\Desktop\\lab1\\ChampionshipAssist\\ChampionshipAssist.Repositories\\ChampionshipAssist.Repositories.csproj": {
-              "projectPath": "E:\\Desktop\\lab1\\ChampionshipAssist\\ChampionshipAssist.Repositories\\ChampionshipAssist.Repositories.csproj"
+            "D:\\ChampionshipAssist\\Lab 1\\oa-ek\\ChampionshipAssist\\ChampionshipAssist\\ChampionshipAssist.Repositories\\ChampionshipAssist.Repositories.csproj": {
+              "projectPath": "D:\\ChampionshipAssist\\Lab 1\\oa-ek\\ChampionshipAssist\\ChampionshipAssist\\ChampionshipAssist.Repositories\\ChampionshipAssist.Repositories.csproj"
             }
           }
         }
@@ -4026,7 +4026,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
       }
     }
   }

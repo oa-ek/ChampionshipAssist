@@ -10,3 +10,15 @@ E:\Desktop\lab1\ChampionshipAssist\ChampionshipAssist.Core\obj\Debug\net7.0\Cham
 E:\Desktop\lab1\ChampionshipAssist\ChampionshipAssist.Core\obj\Debug\net7.0\refint\ChampionshipAssist.Core.dll
 E:\Desktop\lab1\ChampionshipAssist\ChampionshipAssist.Core\obj\Debug\net7.0\ChampionshipAssist.Core.pdb
 E:\Desktop\lab1\ChampionshipAssist\ChampionshipAssist.Core\obj\Debug\net7.0\ref\ChampionshipAssist.Core.dll
+D:\ChampionshipAssist\Lab 1\oa-ek\ChampionshipAssist\ChampionshipAssist\ChampionshipAssist.Core\bin\Debug\net7.0\ChampionshipAssist.Core.deps.json
+D:\ChampionshipAssist\Lab 1\oa-ek\ChampionshipAssist\ChampionshipAssist\ChampionshipAssist.Core\bin\Debug\net7.0\ChampionshipAssist.Core.dll
+D:\ChampionshipAssist\Lab 1\oa-ek\ChampionshipAssist\ChampionshipAssist\ChampionshipAssist.Core\bin\Debug\net7.0\ChampionshipAssist.Core.pdb
+D:\ChampionshipAssist\Lab 1\oa-ek\ChampionshipAssist\ChampionshipAssist\ChampionshipAssist.Core\obj\Debug\net7.0\ChampionshipAssist.Core.csproj.AssemblyReference.cache
+D:\ChampionshipAssist\Lab 1\oa-ek\ChampionshipAssist\ChampionshipAssist\ChampionshipAssist.Core\obj\Debug\net7.0\ChampionshipAssist.Core.GeneratedMSBuildEditorConfig.editorconfig
+D:\ChampionshipAssist\Lab 1\oa-ek\ChampionshipAssist\ChampionshipAssist\ChampionshipAssist.Core\obj\Debug\net7.0\ChampionshipAssist.Core.AssemblyInfoInputs.cache
+D:\ChampionshipAssist\Lab 1\oa-ek\ChampionshipAssist\ChampionshipAssist\ChampionshipAssist.Core\obj\Debug\net7.0\ChampionshipAssist.Core.AssemblyInfo.cs
+D:\ChampionshipAssist\Lab 1\oa-ek\ChampionshipAssist\ChampionshipAssist\ChampionshipAssist.Core\obj\Debug\net7.0\ChampionshipAssist.Core.csproj.CoreCompileInputs.cache
+D:\ChampionshipAssist\Lab 1\oa-ek\ChampionshipAssist\ChampionshipAssist\ChampionshipAssist.Core\obj\Debug\net7.0\ChampionshipAssist.Core.dll
+D:\ChampionshipAssist\Lab 1\oa-ek\ChampionshipAssist\ChampionshipAssist\ChampionshipAssist.Core\obj\Debug\net7.0\refint\ChampionshipAssist.Core.dll
+D:\ChampionshipAssist\Lab 1\oa-ek\ChampionshipAssist\ChampionshipAssist\ChampionshipAssist.Core\obj\Debug\net7.0\ChampionshipAssist.Core.pdb
+D:\ChampionshipAssist\Lab 1\oa-ek\ChampionshipAssist\ChampionshipAssist\ChampionshipAssist.Core\obj\Debug\net7.0\ref\ChampionshipAssist.Core.dll

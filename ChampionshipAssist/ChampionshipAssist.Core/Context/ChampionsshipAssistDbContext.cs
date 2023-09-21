@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using ChampionshipAssist.Core.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace ChampionshipAssist.Core.Context
@@ -8,6 +9,27 @@ namespace ChampionshipAssist.Core.Context
         public ChampionsshipAssistDbContext(DbContextOptions<ChampionsshipAssistDbContext> options)
             : base(options)
         {
+        }
+
+        public DbSet<Review> Reviews => Set<Review>();
+        public DbSet<Tournament> Tournaments => Set<Tournament>();
+        new public DbSet<User> Users => Set<User>();
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer("Server=DESKTOP-3E83AFL\\SQLEXPRESS;Database=JetEduDb;Integrated Security=True;Encrypt=True;TrustServerCertificate=True");
+            base.OnConfiguring(optionsBuilder);
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Review>()
+                .HasOne(x => x.Tournament)
+                .WithMany(x => x.Reviews).OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Seed();
+
+            base.OnModelCreating(modelBuilder);
         }
     }
 }
