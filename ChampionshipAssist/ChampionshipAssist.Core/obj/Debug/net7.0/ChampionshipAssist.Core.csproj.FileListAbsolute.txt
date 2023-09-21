@@ -22,3 +22,17 @@ D:\ChampionshipAssist\Lab 1\oa-ek\ChampionshipAssist\ChampionshipAssist\Champion
 D:\ChampionshipAssist\Lab 1\oa-ek\ChampionshipAssist\ChampionshipAssist\ChampionshipAssist.Core\obj\Debug\net7.0\refint\ChampionshipAssist.Core.dll
 D:\ChampionshipAssist\Lab 1\oa-ek\ChampionshipAssist\ChampionshipAssist\ChampionshipAssist.Core\obj\Debug\net7.0\ChampionshipAssist.Core.pdb
 D:\ChampionshipAssist\Lab 1\oa-ek\ChampionshipAssist\ChampionshipAssist\ChampionshipAssist.Core\obj\Debug\net7.0\ref\ChampionshipAssist.Core.dll
+E:\Desktop\lab\ChampionshipAssist\ChampionshipAssist.Core\bin\Debug\net7.0\ChampionshipAssist.Core.deps.json
+E:\Desktop\lab\ChampionshipAssist\ChampionshipAssist.Core\bin\Debug\net7.0\ChampionshipAssist.Core.runtimeconfig.json
+E:\Desktop\lab\ChampionshipAssist\ChampionshipAssist.Core\bin\Debug\net7.0\ChampionshipAssist.Core.dll
+E:\Desktop\lab\ChampionshipAssist\ChampionshipAssist.Core\bin\Debug\net7.0\ChampionshipAssist.Core.pdb
+E:\Desktop\lab\ChampionshipAssist\ChampionshipAssist.Core\obj\Debug\net7.0\ChampionshipAssist.Core.csproj.AssemblyReference.cache
+E:\Desktop\lab\ChampionshipAssist\ChampionshipAssist.Core\obj\Debug\net7.0\ChampionshipAssist.Core.GeneratedMSBuildEditorConfig.editorconfig
+E:\Desktop\lab\ChampionshipAssist\ChampionshipAssist.Core\obj\Debug\net7.0\ChampionshipAssist.Core.AssemblyInfoInputs.cache
+E:\Desktop\lab\ChampionshipAssist\ChampionshipAssist.Core\obj\Debug\net7.0\ChampionshipAssist.Core.AssemblyInfo.cs
+E:\Desktop\lab\ChampionshipAssist\ChampionshipAssist.Core\obj\Debug\net7.0\ChampionshipAssist.Core.csproj.CoreCompileInputs.cache
+E:\Desktop\lab\ChampionshipAssist\ChampionshipAssist.Core\obj\Debug\net7.0\ChampionshipAssist.Core.dll
+E:\Desktop\lab\ChampionshipAssist\ChampionshipAssist.Core\obj\Debug\net7.0\refint\ChampionshipAssist.Core.dll
+E:\Desktop\lab\ChampionshipAssist\ChampionshipAssist.Core\obj\Debug\net7.0\ChampionshipAssist.Core.pdb
+E:\Desktop\lab\ChampionshipAssist\ChampionshipAssist.Core\obj\Debug\net7.0\ChampionshipAssist.Core.genruntimeconfig.cache
+E:\Desktop\lab\ChampionshipAssist\ChampionshipAssist.Core\obj\Debug\net7.0\ref\ChampionshipAssist.Core.dll

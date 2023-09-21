@@ -6,6 +6,7 @@ namespace ChampionshipAssist.Core.Context
 {
     public class ChampionsshipAssistDbContext : IdentityDbContext
     {
+        public ChampionsshipAssistDbContext() { }
         public ChampionsshipAssistDbContext(DbContextOptions<ChampionsshipAssistDbContext> options)
             : base(options)
         {
@@ -23,10 +24,6 @@ namespace ChampionshipAssist.Core.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Review>()
-                .HasOne(x => x.Tournament)
-                .WithMany(x => x.Reviews).OnDelete(DeleteBehavior.NoAction);
-
             modelBuilder.Seed();
 
             base.OnModelCreating(modelBuilder);
