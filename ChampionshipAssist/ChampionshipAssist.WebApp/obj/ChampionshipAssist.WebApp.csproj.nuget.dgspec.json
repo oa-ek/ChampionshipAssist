@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Таня\\source\\repos\\ChampionshipAssist\\ChampionshipAssist\\ChampionshipAssist.WebApp\\ChampionshipAssist.WebApp.csproj": {}
+    "C:\\Users\\Таня\\Source\\Repos\\ChampionshipAssist\\ChampionshipAssist\\ChampionshipAssist.WebApp\\ChampionshipAssist.WebApp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Таня\\source\\repos\\ChampionshipAssist\\ChampionshipAssist\\ChampionshipAssist.Core\\ChampionshipAssist.Core.csproj": {
+    "C:\\Users\\Таня\\Source\\Repos\\ChampionshipAssist\\ChampionshipAssist\\ChampionshipAssist.Core\\ChampionshipAssist.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Таня\\source\\repos\\ChampionshipAssist\\ChampionshipAssist\\ChampionshipAssist.Core\\ChampionshipAssist.Core.csproj",
+        "projectUniqueName": "C:\\Users\\Таня\\Source\\Repos\\ChampionshipAssist\\ChampionshipAssist\\ChampionshipAssist.Core\\ChampionshipAssist.Core.csproj",
         "projectName": "ChampionshipAssist.Core",
-        "projectPath": "C:\\Users\\Таня\\source\\repos\\ChampionshipAssist\\ChampionshipAssist\\ChampionshipAssist.Core\\ChampionshipAssist.Core.csproj",
+        "projectPath": "C:\\Users\\Таня\\Source\\Repos\\ChampionshipAssist\\ChampionshipAssist\\ChampionshipAssist.Core\\ChampionshipAssist.Core.csproj",
         "packagesPath": "C:\\Users\\Таня\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Таня\\source\\repos\\ChampionshipAssist\\ChampionshipAssist\\ChampionshipAssist.Core\\obj\\",
+        "outputPath": "C:\\Users\\Таня\\Source\\Repos\\ChampionshipAssist\\ChampionshipAssist\\ChampionshipAssist.Core\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -22,15 +22,15 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net7.0"
+          "net8.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net7.0": {
-            "targetAlias": "net7.0",
+          "net8.0": {
+            "targetAlias": "net8.0",
             "projectReferences": {}
           }
         },
@@ -41,8 +41,8 @@
         }
       },
       "frameworks": {
-        "net7.0": {
-          "targetAlias": "net7.0",
+        "net8.0": {
+          "targetAlias": "net8.0",
           "dependencies": {
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
@@ -75,16 +75,16 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Таня\\source\\repos\\ChampionshipAssist\\ChampionshipAssist\\ChampionshipAssist.Repositories\\ChampionshipAssist.Repositories.csproj": {
+    "C:\\Users\\Таня\\Source\\Repos\\ChampionshipAssist\\ChampionshipAssist\\ChampionshipAssist.Repositories\\ChampionshipAssist.Repositories.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Таня\\source\\repos\\ChampionshipAssist\\ChampionshipAssist\\ChampionshipAssist.Repositories\\ChampionshipAssist.Repositories.csproj",
+        "projectUniqueName": "C:\\Users\\Таня\\Source\\Repos\\ChampionshipAssist\\ChampionshipAssist\\ChampionshipAssist.Repositories\\ChampionshipAssist.Repositories.csproj",
         "projectName": "ChampionshipAssist.Repositories",
-        "projectPath": "C:\\Users\\Таня\\source\\repos\\ChampionshipAssist\\ChampionshipAssist\\ChampionshipAssist.Repositories\\ChampionshipAssist.Repositories.csproj",
+        "projectPath": "C:\\Users\\Таня\\Source\\Repos\\ChampionshipAssist\\ChampionshipAssist\\ChampionshipAssist.Repositories\\ChampionshipAssist.Repositories.csproj",
         "packagesPath": "C:\\Users\\Таня\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\Таня\\Source\\Repos\\ChampionshipAssist\\ChampionshipAssist\\ChampionshipAssist.Repositories\\obj\\",
         "projectStyle": "PackageReference",
@@ -97,18 +97,18 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net7.0"
+          "net8.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net7.0": {
-            "targetAlias": "net7.0",
+          "net8.0": {
+            "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\Таня\\source\\repos\\ChampionshipAssist\\ChampionshipAssist\\ChampionshipAssist.Core\\ChampionshipAssist.Core.csproj": {
-                "projectPath": "C:\\Users\\Таня\\source\\repos\\ChampionshipAssist\\ChampionshipAssist\\ChampionshipAssist.Core\\ChampionshipAssist.Core.csproj"
+              "C:\\Users\\Таня\\Source\\Repos\\ChampionshipAssist\\ChampionshipAssist\\ChampionshipAssist.Core\\ChampionshipAssist.Core.csproj": {
+                "projectPath": "C:\\Users\\Таня\\Source\\Repos\\ChampionshipAssist\\ChampionshipAssist\\ChampionshipAssist.Core\\ChampionshipAssist.Core.csproj"
               }
             }
           }
@@ -120,8 +120,8 @@
         }
       },
       "frameworks": {
-        "net7.0": {
-          "targetAlias": "net7.0",
+        "net8.0": {
+          "targetAlias": "net8.0",
           "imports": [
             "net461",
             "net462",
@@ -138,16 +138,16 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Таня\\source\\repos\\ChampionshipAssist\\ChampionshipAssist\\ChampionshipAssist.WebApp\\ChampionshipAssist.WebApp.csproj": {
+    "C:\\Users\\Таня\\Source\\Repos\\ChampionshipAssist\\ChampionshipAssist\\ChampionshipAssist.WebApp\\ChampionshipAssist.WebApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Таня\\source\\repos\\ChampionshipAssist\\ChampionshipAssist\\ChampionshipAssist.WebApp\\ChampionshipAssist.WebApp.csproj",
+        "projectUniqueName": "C:\\Users\\Таня\\Source\\Repos\\ChampionshipAssist\\ChampionshipAssist\\ChampionshipAssist.WebApp\\ChampionshipAssist.WebApp.csproj",
         "projectName": "ChampionshipAssist.WebApp",
-        "projectPath": "C:\\Users\\Таня\\source\\repos\\ChampionshipAssist\\ChampionshipAssist\\ChampionshipAssist.WebApp\\ChampionshipAssist.WebApp.csproj",
+        "projectPath": "C:\\Users\\Таня\\Source\\Repos\\ChampionshipAssist\\ChampionshipAssist\\ChampionshipAssist.WebApp\\ChampionshipAssist.WebApp.csproj",
         "packagesPath": "C:\\Users\\Таня\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\Таня\\Source\\Repos\\ChampionshipAssist\\ChampionshipAssist\\ChampionshipAssist.WebApp\\obj\\",
         "projectStyle": "PackageReference",
@@ -160,18 +160,18 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net7.0"
+          "net8.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net7.0": {
-            "targetAlias": "net7.0",
+          "net8.0": {
+            "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\Таня\\source\\repos\\ChampionshipAssist\\ChampionshipAssist\\ChampionshipAssist.Repositories\\ChampionshipAssist.Repositories.csproj": {
-                "projectPath": "C:\\Users\\Таня\\source\\repos\\ChampionshipAssist\\ChampionshipAssist\\ChampionshipAssist.Repositories\\ChampionshipAssist.Repositories.csproj"
+              "C:\\Users\\Таня\\Source\\Repos\\ChampionshipAssist\\ChampionshipAssist\\ChampionshipAssist.Repositories\\ChampionshipAssist.Repositories.csproj": {
+                "projectPath": "C:\\Users\\Таня\\Source\\Repos\\ChampionshipAssist\\ChampionshipAssist\\ChampionshipAssist.Repositories\\ChampionshipAssist.Repositories.csproj"
               }
             }
           }
@@ -183,8 +183,8 @@
         }
       },
       "frameworks": {
-        "net7.0": {
-          "targetAlias": "net7.0",
+        "net8.0": {
+          "targetAlias": "net8.0",
           "dependencies": {
             "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": {
               "target": "Package",
@@ -226,7 +226,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "5QSVgrKeL1olaVdZ/bph2ii1c48dteYs4vI+9OJhURkVg3uxKSpbMjGoJmcWQmBD5QwKtdgGH6WFB7VSXZCElQ==",
+  "dgSpecHash": "kRWpMczl1P1quMWYqWYnw6IKYpIvllh2bglO+HUlpeWErWK+gHv2/QW6PkAGN1PFfGwufKYE0KahpiTc6q26tA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Таня\\source\\repos\\ChampionshipAssist\\ChampionshipAssist\\ChampionshipAssist.Repositories\\ChampionshipAssist.Repositories.csproj",
+  "projectFilePath": "C:\\Users\\Таня\\Source\\Repos\\ChampionshipAssist\\ChampionshipAssist\\ChampionshipAssist.Repositories\\ChampionshipAssist.Repositories.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Таня\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\Таня\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",

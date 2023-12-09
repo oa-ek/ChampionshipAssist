@@ -46,7 +46,10 @@ namespace ChampionshipAssist.Core.Context
                     StartDate = DateTime.Now,
                     EndDate = DateTime.Now,
                     Rules = "Test1",
-                    IsOpenToAll = true
+                    IsOpenToAll = true,
+                    IsPrivate = false,
+                    ParticipantIDs = [1],
+                    ReviewIDs = [1, 2]
                 },
                 new Tournament
                 {
@@ -55,7 +58,10 @@ namespace ChampionshipAssist.Core.Context
                     StartDate = DateTime.Now,
                     EndDate = DateTime.Now,
                     Rules = "Test1",
-                    IsOpenToAll = true
+                    IsOpenToAll = true,
+                    IsPrivate = false,
+                    ParticipantIDs = [1],
+                    ReviewIDs = [2]
                 },
                 new Tournament
                 {
@@ -64,7 +70,10 @@ namespace ChampionshipAssist.Core.Context
                     StartDate = DateTime.Now,
                     EndDate = DateTime.Now,
                     Rules = "Test1",
-                    IsOpenToAll = true
+                    IsOpenToAll = true,
+                    IsPrivate = false,
+                    ParticipantIDs = [],
+                    ReviewIDs = [3]
                 }
                 );
         }
@@ -79,7 +88,11 @@ namespace ChampionshipAssist.Core.Context
                     Password = "Test2",
                     SteamLink = "Test3",
                     Documents = "Test4",
-                    IsAdmin = false
+                    IsAdmin = false,
+                    IsBanned = false,
+                    IsVACBanned = false,
+                    BanDuration = DateTime.Now,
+                    BanCount = 0
                 }
                 );
         }
