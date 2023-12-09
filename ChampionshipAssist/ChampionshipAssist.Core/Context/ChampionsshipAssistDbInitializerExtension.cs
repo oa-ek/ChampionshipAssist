@@ -18,24 +18,24 @@ namespace ChampionshipAssist.Core.Context
                 new Review
                 {
                     Id = 1,
-                    Id = 1,
-                    Id = 1,
+                    TournamentId = 1,
+                    UserId = 1,
                     Commentary = "Test1",
                     Rating = 5.0
                 },
                 new Review
                 {
                     Id = 2,
-                    Id = 2,
-                    Id = 1,
+                    TournamentId = 2,
+                    UserId = 1,
                     Commentary = "Test2",
                     Rating = 4.0
                 },
                 new Review
                 {
                     Id = 3,
-                    Id = 3,
-                    Id = 1,
+                    TournamentId = 3,
+                    UserId = 1,
                     Commentary = "Test3",
                     Rating = 3.0
                 }

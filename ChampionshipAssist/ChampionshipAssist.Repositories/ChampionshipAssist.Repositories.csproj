@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ChampionshipAssist.Application\ChampionshipAssist.Application.csproj" />
     <ProjectReference Include="..\ChampionshipAssist.Core\ChampionshipAssist.Domain.csproj" />
   </ItemGroup>
 

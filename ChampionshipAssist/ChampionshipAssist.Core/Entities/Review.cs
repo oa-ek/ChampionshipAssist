@@ -6,9 +6,9 @@ namespace ChampionshipAssist.Core.Entities
     {
         public int Id { get; set; } // Ідентифікатор відгуку
         [ForeignKey(nameof(Tournament))]
-        public int Id { get; set; }
+        public int TournamentId { get; set; }
         [ForeignKey(nameof(User))]
-        public int Id { get; set; }
+        public int UserId { get; set; }
         public Tournament? Tournament { get; set; } // Ідентифікатор турніру
         public User? User { get; set; } // Ідентифікатор користувача
         public string? Commentary { get; set; } // Комментар
