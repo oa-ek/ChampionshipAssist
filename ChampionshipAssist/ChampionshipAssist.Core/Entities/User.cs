@@ -11,5 +11,7 @@ namespace ChampionshipAssist.Core.Entities
         public string? Documents { get; set; } // Посилання на документи, що підтверджують особу людини
         public List<Tournament>? Tournaments { get; set; } // На яких турнірах користувач брав участь
         public bool IsAdmin { get; set; } = false; // По дефолту користувач не є адміном
+        public bool IsBanned { get; set; } = false; // По дефолту користувач не заблокований
+        public DateTime BanDuration { get; set; } // Дата, коли користувач знову зможе заходити на сайт
     }
 }
