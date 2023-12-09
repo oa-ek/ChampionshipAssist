@@ -4,13 +4,14 @@
     {
         public List<Tournament> CreatedTournaments { get; set; }
 
-        public void CreateTournament(string name, DateTime startDate, DateTime endDate, string rules, bool isOpenToAll, bool isPrivate, bool vBannedParticipantsAllowed)
+        public void CreateTournament(string name, DateTime startDate, DateTime endDate, int organizerId, string rules, bool isOpenToAll, bool isPrivate, bool vBannedParticipantsAllowed)
         {
             var tournament = new Tournament
             {
                 Name = name,
                 StartDate = startDate,
                 EndDate = endDate,
+                OrganizerId = organizerId,
                 Rules = rules,
                 IsOpenToAll = isOpenToAll,
                 IsPrivate = isPrivate,
@@ -20,18 +21,18 @@
             CreatedTournaments.Add(tournament);
         }
 
-        public void DeleteTournament(int tournamentId)
+        public void DeleteTournament(int id)
         {
-            var tournamentToRemove = CreatedTournaments.FirstOrDefault(t => t.TournamentId == tournamentId);
+            var tournamentToRemove = CreatedTournaments.FirstOrDefault(t => t.Id == id);
             if (tournamentToRemove != null)
             {
                 CreatedTournaments.Remove(tournamentToRemove);
             }
         }
 
-        public void EditTournament(int tournamentId, Tournament updatedTournament)
+        public void EditTournament(int id, Tournament updatedTournament)
         {
-            var existingTournament = CreatedTournaments.FirstOrDefault(t => t.TournamentId == tournamentId);
+            var existingTournament = CreatedTournaments.FirstOrDefault(t => t.Id == id);
             if (existingTournament != null)
             {
                 // Оновити властивості турніру

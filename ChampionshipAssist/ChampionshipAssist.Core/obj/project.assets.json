@@ -3027,9 +3027,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Таня\\Source\\Repos\\ChampionshipAssist\\ChampionshipAssist\\ChampionshipAssist.Core\\ChampionshipAssist.Core.csproj",
-      "projectName": "ChampionshipAssist.Core",
-      "projectPath": "C:\\Users\\Таня\\Source\\Repos\\ChampionshipAssist\\ChampionshipAssist\\ChampionshipAssist.Core\\ChampionshipAssist.Core.csproj",
+      "projectUniqueName": "C:\\Users\\Таня\\Source\\Repos\\ChampionshipAssist\\ChampionshipAssist\\ChampionshipAssist.Core\\ChampionshipAssist.Domain.csproj",
+      "projectName": "ChampionshipAssist.Domain",
+      "projectPath": "C:\\Users\\Таня\\Source\\Repos\\ChampionshipAssist\\ChampionshipAssist\\ChampionshipAssist.Core\\ChampionshipAssist.Domain.csproj",
       "packagesPath": "C:\\Users\\Таня\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\Таня\\Source\\Repos\\ChampionshipAssist\\ChampionshipAssist\\ChampionshipAssist.Core\\obj\\",
       "projectStyle": "PackageReference",

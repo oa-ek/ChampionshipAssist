@@ -4,11 +4,11 @@ namespace ChampionshipAssist.Core.Entities
 {
     public class Review
     {
-        public int ReviewId { get; set; } // Ідентифікатор відгуку
+        public int Id { get; set; } // Ідентифікатор відгуку
         [ForeignKey(nameof(Tournament))]
-        public int TournamentId { get; set; }
+        public int Id { get; set; }
         [ForeignKey(nameof(User))]
-        public int UserId { get; set; }
+        public int Id { get; set; }
         public Tournament? Tournament { get; set; } // Ідентифікатор турніру
         public User? User { get; set; } // Ідентифікатор користувача
         public string? Commentary { get; set; } // Комментар

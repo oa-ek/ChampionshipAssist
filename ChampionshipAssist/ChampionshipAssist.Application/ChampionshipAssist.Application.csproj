@@ -7,11 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ChampionshipAssist.Core\ChampionshipAssist.Domain.csproj" />
+    <Folder Include="Common\" />
+    <Folder Include="Features\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Interfaces\" />
+    <ProjectReference Include="..\ChampionshipAssist.Core\ChampionshipAssist.Domain.csproj" />
   </ItemGroup>
 
 </Project>

@@ -48,7 +48,7 @@ namespace ChampionshipAssist.WebApp.Controllers
                 return NotFound();
             }
 
-            var review = await _context.Reviews.FirstOrDefaultAsync(t => t.ReviewId == id);
+            var review = await _context.Reviews.FirstOrDefaultAsync(t => t.Id == id);
             if (review == null)
             {
                 return NotFound();
@@ -65,7 +65,7 @@ namespace ChampionshipAssist.WebApp.Controllers
                 return NotFound();
             }
 
-            var review = await _context.Reviews.FirstOrDefaultAsync(t => t.ReviewId == id);
+            var review = await _context.Reviews.FirstOrDefaultAsync(t => t.Id == id);
             if (review == null)
             {
                 return NotFound();
@@ -78,7 +78,7 @@ namespace ChampionshipAssist.WebApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Review review)
         {
-            if (id != review.ReviewId)
+            if (id != review.Id)
             {
                 return NotFound();
             }
@@ -92,7 +92,7 @@ namespace ChampionshipAssist.WebApp.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ReviewExists(review.ReviewId))
+                    if (!ReviewExists(review.Id))
                     {
                         return NotFound();
                     }
@@ -114,7 +114,7 @@ namespace ChampionshipAssist.WebApp.Controllers
                 return NotFound();
             }
 
-            var review = await _context.Reviews.FirstOrDefaultAsync(t => t.ReviewId == id);
+            var review = await _context.Reviews.FirstOrDefaultAsync(t => t.Id == id);
             if (review == null)
             {
                 return NotFound();
@@ -135,7 +135,7 @@ namespace ChampionshipAssist.WebApp.Controllers
 
         private bool ReviewExists(int id)
         {
-            return _context.Reviews.Any(t => t.ReviewId == id);
+            return _context.Reviews.Any(t => t.Id == id);
         }
     }
 }

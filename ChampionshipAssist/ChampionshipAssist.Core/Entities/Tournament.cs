@@ -4,8 +4,9 @@ namespace ChampionshipAssist.Core.Entities
 {
     public class Tournament
     {
-        public int TournamentId { get; set; } // Ідентифікатор турніру
+        public int Id { get; set; } // Ідентифікатор турніру
         public string? Name { get; set; } // Назва
+        public int OrganizerId { get; set; } // Ідентифікатор організатора
         public DateTime? StartDate { get; set; } // Дата початку
         public DateTime? EndDate { get; set; } // Дата кінця
         public string? Rules { get; set; } // Правила

@@ -49,7 +49,7 @@ namespace ChampionshipAssist.WebApp.Controllers
                 return NotFound();
             }
 
-            var tournament = await _context.Tournaments.FirstOrDefaultAsync(t => t.TournamentId == id);
+            var tournament = await _context.Tournaments.FirstOrDefaultAsync(t => t.Id == id);
             if (tournament == null)
             {
                 return NotFound();
@@ -66,7 +66,7 @@ namespace ChampionshipAssist.WebApp.Controllers
                 return NotFound();
             }
 
-            var tournament = await _context.Tournaments.FirstOrDefaultAsync(t => t.TournamentId == id);
+            var tournament = await _context.Tournaments.FirstOrDefaultAsync(t => t.Id == id);
             if (tournament == null)
             {
                 return NotFound();
@@ -79,7 +79,7 @@ namespace ChampionshipAssist.WebApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Tournament tournament)
         {
-            if (id != tournament.TournamentId)
+            if (id != tournament.Id)
             {
                 return NotFound();
             }
@@ -93,7 +93,7 @@ namespace ChampionshipAssist.WebApp.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!TournamentExists(tournament.TournamentId))
+                    if (!TournamentExists(tournament.Id))
                     {
                         return NotFound();
                     }
@@ -115,7 +115,7 @@ namespace ChampionshipAssist.WebApp.Controllers
                 return NotFound();
             }
 
-            var tournament = await _context.Tournaments.FirstOrDefaultAsync(t => t.TournamentId == id);
+            var tournament = await _context.Tournaments.FirstOrDefaultAsync(t => t.Id == id);
             if (tournament == null)
             {
                 return NotFound();
@@ -136,7 +136,7 @@ namespace ChampionshipAssist.WebApp.Controllers
 
         private bool TournamentExists(int id)
         {
-            return _context.Tournaments.Any(t => t.TournamentId == id);
+            return _context.Tournaments.Any(t => t.Id == id);
         }
     }
 }

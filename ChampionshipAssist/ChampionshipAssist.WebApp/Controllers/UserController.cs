@@ -48,7 +48,7 @@ namespace ChampionshipAssist.WebApp.Controllers
                 return NotFound();
             }
 
-            var user = await _context.Users.FirstOrDefaultAsync(t => t.UserId == id);
+            var user = await _context.Users.FirstOrDefaultAsync(t => t.Id == id);
             if (user == null)
             {
                 return NotFound();
@@ -65,7 +65,7 @@ namespace ChampionshipAssist.WebApp.Controllers
                 return NotFound();
             }
 
-            var user = await _context.Users.FirstOrDefaultAsync(t => t.UserId == id);
+            var user = await _context.Users.FirstOrDefaultAsync(t => t.Id == id);
             if (user == null)
             {
                 return NotFound();
@@ -78,7 +78,7 @@ namespace ChampionshipAssist.WebApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, User user)
         {
-            if (id != user.UserId)
+            if (id != user.Id)
             {
                 return NotFound();
             }
@@ -92,7 +92,7 @@ namespace ChampionshipAssist.WebApp.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!UserExists(user.UserId))
+                    if (!UserExists(user.Id))
                     {
                         return NotFound();
                     }
@@ -114,7 +114,7 @@ namespace ChampionshipAssist.WebApp.Controllers
                 return NotFound();
             }
 
-            var user = await _context.Users.FirstOrDefaultAsync(t => t.UserId == id);
+            var user = await _context.Users.FirstOrDefaultAsync(t => t.Id == id);
             if (user == null)
             {
                 return NotFound();
@@ -135,7 +135,7 @@ namespace ChampionshipAssist.WebApp.Controllers
 
         private bool UserExists(int id)
         {
-            return _context.Users.Any(t => t.UserId == id);
+            return _context.Users.Any(t => t.Id == id);
         }
     }
 }

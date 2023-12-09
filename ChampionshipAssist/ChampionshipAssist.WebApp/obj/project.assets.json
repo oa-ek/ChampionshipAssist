@@ -1223,7 +1223,7 @@
           }
         }
       },
-      "ChampionshipAssist.Core/1.0.0": {
+      "ChampionshipAssist.Domain/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
         "dependencies": {
@@ -1231,17 +1231,17 @@
           "Microsoft.EntityFrameworkCore.SqlServer": "7.0.11"
         },
         "compile": {
-          "bin/placeholder/ChampionshipAssist.Core.dll": {}
+          "bin/placeholder/ChampionshipAssist.Domain.dll": {}
         },
         "runtime": {
-          "bin/placeholder/ChampionshipAssist.Core.dll": {}
+          "bin/placeholder/ChampionshipAssist.Domain.dll": {}
         }
       },
       "ChampionshipAssist.Repositories/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
         "dependencies": {
-          "ChampionshipAssist.Core": "1.0.0"
+          "ChampionshipAssist.Domain": "1.0.0"
         },
         "compile": {
           "bin/placeholder/ChampionshipAssist.Repositories.dll": {}
@@ -3346,10 +3346,10 @@
         "useSharedDesignerContext.txt"
       ]
     },
-    "ChampionshipAssist.Core/1.0.0": {
+    "ChampionshipAssist.Domain/1.0.0": {
       "type": "project",
-      "path": "../ChampionshipAssist.Core/ChampionshipAssist.Core.csproj",
-      "msbuildProject": "../ChampionshipAssist.Core/ChampionshipAssist.Core.csproj"
+      "path": "../ChampionshipAssist.Core/ChampionshipAssist.Domain.csproj",
+      "msbuildProject": "../ChampionshipAssist.Core/ChampionshipAssist.Domain.csproj"
     },
     "ChampionshipAssist.Repositories/1.0.0": {
       "type": "project",
