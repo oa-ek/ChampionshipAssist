@@ -1,6 +1,7 @@
 ﻿using ChampionshipAssist.Core.Context;
 using ChampionshipAssist.Core.Entities;
 using ChampionshipAssist.Repositories.Interfaces;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,8 @@ namespace ChampionshipAssist.Repositories.Repos
     public class UserRepository : IUserRepository
     {
         private ChampionsshipAssistDbContext _context;
+        private readonly UserManager<User> userManager;
+        private readonly RoleManager<IdentityUser> roleManager;
 
         public UserRepository(ChampionsshipAssistDbContext context)
         {
@@ -35,7 +38,8 @@ namespace ChampionshipAssist.Repositories.Repos
 
         public IEnumerable<User> GetAll()
         {
-            return _context.Users.ToList();
+            var users = _context.Users.ToList();
+            return users;
         }
 
         public void Save()

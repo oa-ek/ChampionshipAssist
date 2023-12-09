@@ -84,11 +84,24 @@ namespace ChampionshipAssist.Core.Context
                 new User
                 {
                     Id = 1,
-                    Username = "Test1",
-                    Password = "Test2",
-                    SteamLink = "Test3",
-                    Documents = "Test4",
+                    Username = "VACBannedTest",
+                    Password = "VACBannedTest",
+                    SteamLink = "https://steamcommunity.com/id/Budding/",
+                    Documents = "",
                     IsAdmin = false,
+                    IsBanned = false,
+                    IsVACBanned = true,
+                    BanDuration = DateTime.Now,
+                    BanCount = 0
+                },
+                new User
+                {
+                    Id = 2,
+                    Username = "Admin",
+                    Password = "Admin",
+                    SteamLink = "https://steamcommunity.com/id/Gabe/",
+                    Documents = "",
+                    IsAdmin = true,
                     IsBanned = false,
                     IsVACBanned = false,
                     BanDuration = DateTime.Now,

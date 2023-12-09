@@ -1223,6 +1223,19 @@
           }
         }
       },
+      "ChampionshipAssist.Application/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "ChampionshipAssist.Domain": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/ChampionshipAssist.Application.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ChampionshipAssist.Application.dll": {}
+        }
+      },
       "ChampionshipAssist.Domain/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
@@ -1241,6 +1254,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
         "dependencies": {
+          "ChampionshipAssist.Application": "1.0.0",
           "ChampionshipAssist.Domain": "1.0.0"
         },
         "compile": {
@@ -3345,6 +3359,11 @@
         "system.windows.extensions.nuspec",
         "useSharedDesignerContext.txt"
       ]
+    },
+    "ChampionshipAssist.Application/1.0.0": {
+      "type": "project",
+      "path": "../ChampionshipAssist.Application/ChampionshipAssist.Application.csproj",
+      "msbuildProject": "../ChampionshipAssist.Application/ChampionshipAssist.Application.csproj"
     },
     "ChampionshipAssist.Domain/1.0.0": {
       "type": "project",
