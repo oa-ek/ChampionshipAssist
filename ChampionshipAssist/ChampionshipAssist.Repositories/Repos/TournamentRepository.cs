@@ -2,7 +2,7 @@
 using ChampionshipAssist.Core.Entities;
 using ChampionshipAssist.Repositories.Interfaces;
 
-namespace ChampionshipAssist.Repositories.Repos
+namespace ChampionshipAssist.Repositories.Repositories
 {
     public class TournamentRepository : ITournamentRepository
     {

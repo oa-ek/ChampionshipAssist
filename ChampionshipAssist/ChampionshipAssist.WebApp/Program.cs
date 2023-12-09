@@ -1,5 +1,3 @@
-using ChampionshipAssist.Repositories.Interfaces;
-using ChampionshipAssist.Repositories.Repos;
 using ChampionshipAssist.WebApp.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -14,11 +12,6 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
-
-builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddScoped<ITournamentRepository, TournamentRepository>();
-builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
-
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
