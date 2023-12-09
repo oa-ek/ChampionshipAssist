@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ChampionshipAssist.Core.Migrations
 {
     /// <inheritdoc />
-    public partial class In : Migration
+    public partial class DBMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -62,7 +62,9 @@ namespace ChampionshipAssist.Core.Migrations
                     StartDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     EndDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Rules = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IsOpenToAll = table.Column<bool>(type: "bit", nullable: true)
+                    IsOpenToAll = table.Column<bool>(type: "bit", nullable: true),
+                    IsPrivate = table.Column<bool>(type: "bit", nullable: true),
+                    VACBannedParticipantsAllowed = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -79,7 +81,12 @@ namespace ChampionshipAssist.Core.Migrations
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     SteamLink = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Documents = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IsAdmin = table.Column<bool>(type: "bit", nullable: false)
+                    IsAdmin = table.Column<bool>(type: "bit", nullable: false),
+                    IsBanned = table.Column<bool>(type: "bit", nullable: false),
+                    IsVACBanned = table.Column<bool>(type: "bit", nullable: false),
+                    BanDuration = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    AccountStatus = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    BanCount = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -198,8 +205,8 @@ namespace ChampionshipAssist.Core.Migrations
                 {
                     ReviewId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    TournamentId = table.Column<int>(type: "int", nullable: true),
-                    UserId = table.Column<int>(type: "int", nullable: true),
+                    TournamentId = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false),
                     Commentary = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Rating = table.Column<double>(type: "float", nullable: true)
                 },
@@ -215,7 +222,8 @@ namespace ChampionshipAssist.Core.Migrations
                         name: "FK_Reviews_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
-                        principalColumn: "UserId");
+                        principalColumn: "UserId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -243,29 +251,29 @@ namespace ChampionshipAssist.Core.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Reviews",
-                columns: new[] { "ReviewId", "Commentary", "Rating", "TournamentId", "UserId" },
-                values: new object[,]
-                {
-                    { 1, "Test1", 5.0, null, null },
-                    { 2, "Test2", 4.0, null, null },
-                    { 3, "Test3", 3.0, null, null }
-                });
-
-            migrationBuilder.InsertData(
                 table: "Tournaments",
-                columns: new[] { "TournamentId", "EndDate", "IsOpenToAll", "Name", "Rules", "StartDate" },
+                columns: new[] { "TournamentId", "EndDate", "IsOpenToAll", "IsPrivate", "Name", "Rules", "StartDate", "VACBannedParticipantsAllowed" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2023, 9, 21, 20, 11, 11, 376, DateTimeKind.Local).AddTicks(9015), true, "Test1", "Test1", new DateTime(2023, 9, 21, 20, 11, 11, 376, DateTimeKind.Local).AddTicks(8962) },
-                    { 2, new DateTime(2023, 9, 21, 20, 11, 11, 376, DateTimeKind.Local).AddTicks(9022), true, "Test2", "Test1", new DateTime(2023, 9, 21, 20, 11, 11, 376, DateTimeKind.Local).AddTicks(9020) },
-                    { 3, new DateTime(2023, 9, 21, 20, 11, 11, 376, DateTimeKind.Local).AddTicks(9027), true, "Test3", "Test1", new DateTime(2023, 9, 21, 20, 11, 11, 376, DateTimeKind.Local).AddTicks(9025) }
+                    { 1, new DateTime(2023, 12, 9, 13, 4, 19, 772, DateTimeKind.Local).AddTicks(5387), true, false, "Test1", "Test1", new DateTime(2023, 12, 9, 13, 4, 19, 772, DateTimeKind.Local).AddTicks(5370), null },
+                    { 2, new DateTime(2023, 12, 9, 13, 4, 19, 772, DateTimeKind.Local).AddTicks(5391), true, false, "Test2", "Test1", new DateTime(2023, 12, 9, 13, 4, 19, 772, DateTimeKind.Local).AddTicks(5390), null },
+                    { 3, new DateTime(2023, 12, 9, 13, 4, 19, 772, DateTimeKind.Local).AddTicks(5394), true, false, "Test3", "Test1", new DateTime(2023, 12, 9, 13, 4, 19, 772, DateTimeKind.Local).AddTicks(5393), null }
                 });
 
             migrationBuilder.InsertData(
                 table: "Users",
-                columns: new[] { "UserId", "Documents", "IsAdmin", "Password", "SteamLink", "Username" },
-                values: new object[] { 1, "Test4", false, "Test2", "Test3", "Test1" });
+                columns: new[] { "UserId", "AccountStatus", "BanCount", "BanDuration", "Documents", "IsAdmin", "IsBanned", "IsVACBanned", "Password", "SteamLink", "Username" },
+                values: new object[] { 1, "User", 0, new DateTime(2023, 12, 9, 13, 4, 19, 772, DateTimeKind.Local).AddTicks(5428), "Test4", false, false, false, "Test2", "Test3", "Test1" });
+
+            migrationBuilder.InsertData(
+                table: "Reviews",
+                columns: new[] { "ReviewId", "Commentary", "Rating", "TournamentId", "UserId" },
+                values: new object[,]
+                {
+                    { 1, "Test1", 5.0, 1, 1 },
+                    { 2, "Test2", 4.0, 2, 1 },
+                    { 3, "Test3", 3.0, 3, 1 }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

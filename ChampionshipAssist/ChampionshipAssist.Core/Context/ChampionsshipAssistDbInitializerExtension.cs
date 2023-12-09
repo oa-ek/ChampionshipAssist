@@ -18,18 +18,24 @@ namespace ChampionshipAssist.Core.Context
                 new Review
                 {
                     ReviewId = 1,
+                    TournamentId = 1,
+                    UserId = 1,
                     Commentary = "Test1",
                     Rating = 5.0
                 },
                 new Review
                 {
                     ReviewId = 2,
+                    TournamentId = 2,
+                    UserId = 1,
                     Commentary = "Test2",
                     Rating = 4.0
                 },
                 new Review
                 {
                     ReviewId = 3,
+                    TournamentId = 3,
+                    UserId = 1,
                     Commentary = "Test3",
                     Rating = 3.0
                 }
@@ -47,9 +53,7 @@ namespace ChampionshipAssist.Core.Context
                     EndDate = DateTime.Now,
                     Rules = "Test1",
                     IsOpenToAll = true,
-                    IsPrivate = false,
-                    ParticipantIDs = [1],
-                    ReviewIDs = [1, 2]
+                    IsPrivate = false
                 },
                 new Tournament
                 {
@@ -59,9 +63,7 @@ namespace ChampionshipAssist.Core.Context
                     EndDate = DateTime.Now,
                     Rules = "Test1",
                     IsOpenToAll = true,
-                    IsPrivate = false,
-                    ParticipantIDs = [1],
-                    ReviewIDs = [2]
+                    IsPrivate = false
                 },
                 new Tournament
                 {
@@ -71,9 +73,7 @@ namespace ChampionshipAssist.Core.Context
                     EndDate = DateTime.Now,
                     Rules = "Test1",
                     IsOpenToAll = true,
-                    IsPrivate = false,
-                    ParticipantIDs = [],
-                    ReviewIDs = [3]
+                    IsPrivate = false
                 }
                 );
         }

@@ -20,7 +20,7 @@ namespace ChampionshipAssist.Core.Context
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=DESKTOP-3E83AFL\\SQLEXPRESS;Database=ChampionsshipAssistDB;Integrated Security=True;Encrypt=True;TrustServerCertificate=True");
+            optionsBuilder.UseSqlServer("Server=DESKTOP-KSFBBP6\\SQLEXPRESS;Database=ChampionsshipAssistDB;Integrated Security=True;Encrypt=True;TrustServerCertificate=True");
             base.OnConfiguring(optionsBuilder);
         }
 

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ChampionshipAssist.Core.Migrations
 {
     [DbContext(typeof(ChampionsshipAssistDbContext))]
-    [Migration("20230921171111_In")]
-    partial class In
+    [Migration("20231209100419_DBMigration")]
+    partial class DBMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -39,10 +39,10 @@ namespace ChampionshipAssist.Core.Migrations
                     b.Property<double?>("Rating")
                         .HasColumnType("float");
 
-                    b.Property<int?>("TournamentId")
+                    b.Property<int>("TournamentId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("UserId")
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("ReviewId");
@@ -58,19 +58,25 @@ namespace ChampionshipAssist.Core.Migrations
                         {
                             ReviewId = 1,
                             Commentary = "Test1",
-                            Rating = 5.0
+                            Rating = 5.0,
+                            TournamentId = 1,
+                            UserId = 1
                         },
                         new
                         {
                             ReviewId = 2,
                             Commentary = "Test2",
-                            Rating = 4.0
+                            Rating = 4.0,
+                            TournamentId = 2,
+                            UserId = 1
                         },
                         new
                         {
                             ReviewId = 3,
                             Commentary = "Test3",
-                            Rating = 3.0
+                            Rating = 3.0,
+                            TournamentId = 3,
+                            UserId = 1
                         });
                 });
 
@@ -88,6 +94,9 @@ namespace ChampionshipAssist.Core.Migrations
                     b.Property<bool?>("IsOpenToAll")
                         .HasColumnType("bit");
 
+                    b.Property<bool?>("IsPrivate")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
@@ -97,6 +106,9 @@ namespace ChampionshipAssist.Core.Migrations
                     b.Property<DateTime?>("StartDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<bool?>("VACBannedParticipantsAllowed")
+                        .HasColumnType("bit");
+
                     b.HasKey("TournamentId");
 
                     b.ToTable("Tournaments");
@@ -105,29 +117,32 @@ namespace ChampionshipAssist.Core.Migrations
                         new
                         {
                             TournamentId = 1,
-                            EndDate = new DateTime(2023, 9, 21, 20, 11, 11, 376, DateTimeKind.Local).AddTicks(9015),
+                            EndDate = new DateTime(2023, 12, 9, 13, 4, 19, 772, DateTimeKind.Local).AddTicks(5387),
                             IsOpenToAll = true,
+                            IsPrivate = false,
                             Name = "Test1",
                             Rules = "Test1",
-                            StartDate = new DateTime(2023, 9, 21, 20, 11, 11, 376, DateTimeKind.Local).AddTicks(8962)
+                            StartDate = new DateTime(2023, 12, 9, 13, 4, 19, 772, DateTimeKind.Local).AddTicks(5370)
                         },
                         new
                         {
                             TournamentId = 2,
-                            EndDate = new DateTime(2023, 9, 21, 20, 11, 11, 376, DateTimeKind.Local).AddTicks(9022),
+                            EndDate = new DateTime(2023, 12, 9, 13, 4, 19, 772, DateTimeKind.Local).AddTicks(5391),
                             IsOpenToAll = true,
+                            IsPrivate = false,
                             Name = "Test2",
                             Rules = "Test1",
-                            StartDate = new DateTime(2023, 9, 21, 20, 11, 11, 376, DateTimeKind.Local).AddTicks(9020)
+                            StartDate = new DateTime(2023, 12, 9, 13, 4, 19, 772, DateTimeKind.Local).AddTicks(5390)
                         },
                         new
                         {
                             TournamentId = 3,
-                            EndDate = new DateTime(2023, 9, 21, 20, 11, 11, 376, DateTimeKind.Local).AddTicks(9027),
+                            EndDate = new DateTime(2023, 12, 9, 13, 4, 19, 772, DateTimeKind.Local).AddTicks(5394),
                             IsOpenToAll = true,
+                            IsPrivate = false,
                             Name = "Test3",
                             Rules = "Test1",
-                            StartDate = new DateTime(2023, 9, 21, 20, 11, 11, 376, DateTimeKind.Local).AddTicks(9025)
+                            StartDate = new DateTime(2023, 12, 9, 13, 4, 19, 772, DateTimeKind.Local).AddTicks(5393)
                         });
                 });
 
@@ -139,10 +154,26 @@ namespace ChampionshipAssist.Core.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserId"));
 
+                    b.Property<string>("AccountStatus")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("BanCount")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("BanDuration")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Documents")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsAdmin")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsBanned")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsVACBanned")
                         .HasColumnType("bit");
 
                     b.Property<string>("Password")
@@ -162,8 +193,13 @@ namespace ChampionshipAssist.Core.Migrations
                         new
                         {
                             UserId = 1,
+                            AccountStatus = "User",
+                            BanCount = 0,
+                            BanDuration = new DateTime(2023, 12, 9, 13, 4, 19, 772, DateTimeKind.Local).AddTicks(5428),
                             Documents = "Test4",
                             IsAdmin = false,
+                            IsBanned = false,
+                            IsVACBanned = false,
                             Password = "Test2",
                             SteamLink = "Test3",
                             Username = "Test1"
@@ -388,11 +424,14 @@ namespace ChampionshipAssist.Core.Migrations
                     b.HasOne("ChampionshipAssist.Core.Entities.Tournament", "Tournament")
                         .WithMany("Reviews")
                         .HasForeignKey("TournamentId")
-                        .OnDelete(DeleteBehavior.NoAction);
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
 
                     b.HasOne("ChampionshipAssist.Core.Entities.User", "User")
                         .WithMany()
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Tournament");
 

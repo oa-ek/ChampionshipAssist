@@ -4,7 +4,7 @@
     {
         public List<Tournament> CreatedTournaments { get; set; }
 
-        public void CreateTournament(string name, DateTime startDate, DateTime endDate, string rules, bool isOpenToAll)
+        public void CreateTournament(string name, DateTime startDate, DateTime endDate, string rules, bool isOpenToAll, bool isPrivate, bool vBannedParticipantsAllowed)
         {
             var tournament = new Tournament
             {
@@ -12,7 +12,9 @@
                 StartDate = startDate,
                 EndDate = endDate,
                 Rules = rules,
-                IsOpenToAll = isOpenToAll
+                IsOpenToAll = isOpenToAll,
+                IsPrivate = isPrivate,
+                VACBannedParticipantsAllowed = vBannedParticipantsAllowed
             };
 
             CreatedTournaments.Add(tournament);
@@ -38,6 +40,8 @@
                 existingTournament.EndDate = updatedTournament.EndDate;
                 existingTournament.Rules = updatedTournament.Rules;
                 existingTournament.IsOpenToAll = updatedTournament.IsOpenToAll;
+                existingTournament.IsPrivate = updatedTournament.IsPrivate;
+                existingTournament.VACBannedParticipantsAllowed = updatedTournament.VACBannedParticipantsAllowed;
             }
         }
     }
