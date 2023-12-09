@@ -1,7 +1,9 @@
 ﻿using ChampionshipAssist.Core.Context;
 using ChampionshipAssist.Core.Entities;
+using ChampionshipAssist.Repositories.DTOs.User;
 using ChampionshipAssist.Repositories.Interfaces;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,40 +18,98 @@ namespace ChampionshipAssist.Repositories.Repos
         private readonly UserManager<User> userManager;
         private readonly RoleManager<IdentityUser> roleManager;
 
-        public UserRepository(ChampionsshipAssistDbContext context)
+        public async Task<string> CreateAsync(UserCreateDto obj)
         {
-            _context = context;
-        }
-        public void Add(User obj)
-        {
-            _context.Users.Add(obj);
-            Save();
+            var newUser = new User
+            {
+                Email = obj.Email,
+                UserName = obj.Name,
+                SteamLink = obj.SteamLink,
+                Documents = obj.Documents,
+                NormalizedEmail = obj.Email.ToUpper(),
+                NormalizedUserName = obj.Name.ToUpper(),
+                EmailConfirmed = true
+            };
+
+            await userManager.CreateAsync(newUser, obj.Password);
+
+            return _context.Users.First(x => x.Email == obj.Email).Id;
         }
 
-        public void Delete(int id)
+        public async Task DeleteAsync(string id)
         {
-            throw new NotImplementedException();
+            var user = _context.Users.Find(id);
+
+            if ((await userManager.GetRolesAsync(user)).Any())
+            {
+                await userManager.RemoveFromRolesAsync(user, await userManager.GetRolesAsync(user));
+            }
+            await userManager.DeleteAsync(user);
         }
 
-        public User Get(int id)
+        public async Task<UserDto> GetAsync(string id)
         {
-            return _context.Users.Find(id);
+            var user = await _context.Users.FindAsync(id);
+            var roles = await userManager.GetRolesAsync(user);
+            return
+                new UserDto
+                {
+                    Id = user.Id,
+                    Email = user.Email,
+                    Name = user.UserName,
+                    SteamLink = user.SteamLink,
+                    IsConfirmed = user.EmailConfirmed,
+                    Roles = roles.ToList()
+                };
         }
 
-        public IEnumerable<User> GetAll()
+        public async Task<IEnumerable<UserDto>> GetAllAsync()
         {
-            var users = _context.Users.ToList();
-            return users;
+            var userIds = _context.Users.Select(x => x.Id).ToList();
+            var usersDto = new List<UserDto>();
+
+            foreach (var id in userIds)
+                usersDto.Add(await GetAsync(id));
+
+            return usersDto;
+        }
+
+        public async Task UpdateAsync(UserDto model, string[] roles)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(x => x.Id == model.Id);
+
+            if (user.Email != model.Email)
+            {
+                user.Email = model.Email;
+                user.UserName = model.Name;
+                user.NormalizedUserName = model.Name.ToUpper();
+                user.NormalizedEmail = model.Email.ToUpper();
+            }
+
+            if (user.SteamLink != model.SteamLink) user.SteamLink = model.SteamLink;
+            if (user.EmailConfirmed != model.IsConfirmed) user.EmailConfirmed = model.IsConfirmed;
+
+            if ((await userManager.GetRolesAsync(user)).Any())
+            {
+                await userManager.RemoveFromRolesAsync(user, await userManager.GetRolesAsync(user));
+            }
+
+            if (roles.Any())
+            {
+                await userManager.AddToRolesAsync(user, roles.ToList());
+            }
+
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<IEnumerable<string?>> GetRolesAsync()
+        {
+            return _context.Roles.Select(x => x.Name).ToList();
         }
 
         public void Save()
         {
-            _context.SaveChanges();
-        }
-
-        public void Update(User obj)
-        {
-            _context.Users.Update(obj);
+            throw new NotImplementedException();
         }
     }
 }

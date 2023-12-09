@@ -18,12 +18,12 @@ namespace ChampionshipAssist.Repositories.Repos
             Save();
         }
 
-        public void Delete(int id)
+        public void Delete(string id)
         {
             throw new NotImplementedException();
         }
 
-        public Review Get(int id)
+        public Review Get(string id)
         {
             return _context.Reviews.Find(id);
         }

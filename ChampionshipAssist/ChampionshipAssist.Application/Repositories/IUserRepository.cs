@@ -1,13 +1,14 @@
-﻿using ChampionshipAssist.Core.Entities;
+﻿using ChampionshipAssist.Repositories.DTOs.User;
 
 namespace ChampionshipAssist.Repositories.Interfaces
 {
     public interface IUserRepository : ISave
     {
-        User Get(int id);
-        IEnumerable<User> GetAll();
-        void Add(User obj);
-        void Update(User obj);
-        void Delete(int id);
+        Task<UserDto> GetAsync(string id);
+        Task<IEnumerable<UserDto>> GetAllAsync();
+        Task<string> CreateAsync(UserCreateDto obj);
+        Task UpdateAsync(UserDto obj, string[] roles);
+        Task<IEnumerable<string>> GetRolesAsync();
+        Task DeleteAsync(string id);
     }
 }

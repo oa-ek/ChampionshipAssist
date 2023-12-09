@@ -1,19 +1,24 @@
-﻿using System;
+﻿using ChampionshipAssist.Domain.Common;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 namespace ChampionshipAssist.Core.Entities
 {
-    public class Tournament
+    public class Tournament : BaseEntity
     {
-        public int Id { get; set; } // Ідентифікатор турніру
         public string? Name { get; set; } // Назва
-        public int OrganizerId { get; set; } // Ідентифікатор організатора
+        [ForeignKey(nameof(User))]
+        public string? OrganizerId { get; set; } // Ідентифікатор організатора
         public DateTime? StartDate { get; set; } // Дата початку
         public DateTime? EndDate { get; set; } // Дата кінця
+        public string? ShortDesc { get; set; } // Короткий опис
+        public string? LongDesc { get; set; } // Детальний опис
         public string? Rules { get; set; } // Правила
-        public bool? IsOpenToAll { get; set; } // Відкритий для всіх? Якщо ні, то там можуть бути лише кіберспортсмени
+        public bool? IsOpenToUsers { get; set; } // Відкритий для звичайних користувачів?
+        public bool? IsOpenToCybersportsmen { get; set; } // Відкритий для кіберспортсменів?
         public bool? IsPrivate { get; set; } // Якщо турнір приватний, то він не відображатиметься в публічному списку (але вони будуть відображатися для Адміністраторів). Однак його можна буде переглянути за допомогою посилання
         public bool? VACBannedParticipantsAllowed { get; set; } // Чи можуть користувачі з VAC-баном брати участь в турнірі
-        public List<User>? Participants { get; set; } // Учасники
-        public List<Review>? Reviews { get; set; } // Відгуки
+        public ICollection<User>? Participants { get; set; } // Учасники
+        public ICollection<Review>? Reviews { get; set; } // Відгуки
     }
 }

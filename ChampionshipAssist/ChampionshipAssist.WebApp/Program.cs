@@ -22,11 +22,8 @@ builder.Services.AddDefaultIdentity<User>(options =>
     options.Password.RequireUppercase = false;
     options.Password.RequireNonAlphanumeric = false;
     options.Password.RequiredLength = 4;
-}).AddRoles<IdentityRole>().AddEntityFrameworkStores<ChampionsshipAssistDbContext>();
-
-builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddScoped<ITournamentRepository, TournamentRepository>();
-builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
+}).AddRoles<IdentityRole>()
+    .AddEntityFrameworkStores<ChampionsshipAssistDbContext>();
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();

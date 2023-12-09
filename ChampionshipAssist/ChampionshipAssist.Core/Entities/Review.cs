@@ -1,16 +1,14 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using ChampionshipAssist.Domain.Common;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ChampionshipAssist.Core.Entities
 {
-    public class Review
+    public class Review : BaseEntity
     {
-        public int Id { get; set; } // Ідентифікатор відгуку
-        [ForeignKey(nameof(Tournament))]
-        public int TournamentId { get; set; }
-        [ForeignKey(nameof(User))]
-        public int UserId { get; set; }
-        public Tournament? Tournament { get; set; } // Ідентифікатор турніру
-        public User? User { get; set; } // Ідентифікатор користувача
+        public string? TournamentId { get; set; } // Ідентифікатор турніру
+        public string? UserId { get; set; } // Ідентифікатор користувача
+        public Tournament? Tournament { get; set; } 
+        public User? User { get; set; } 
         public string? Commentary { get; set; } // Комментар
         public double? Rating { get; set; } // Рейтинг
     }

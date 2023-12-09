@@ -4,10 +4,10 @@ namespace ChampionshipAssist.Repositories.Interfaces
 {
     public interface IReviewRepository : ISave
     {
-        Review Get(int id);
+        Review Get(string id);
         IEnumerable<Review> GetAll();
         void Add(Review obj);
         void Update(Review obj);
-        void Delete(int id);
+        void Delete(string id);
     }
 }
