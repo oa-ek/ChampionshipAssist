@@ -2,7 +2,7 @@
 using ChampionshipAssist.Core.Entities;
 using ChampionshipAssist.Repositories.Interfaces;
 
-namespace ChampionshipAssist.Repositories.Repositories
+namespace ChampionshipAssist.Repositories.Repos
 {
     public class ReviewRepository : IReviewRepository
     {
