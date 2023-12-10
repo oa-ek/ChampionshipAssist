@@ -19,10 +19,4 @@
     <ProjectReference Include="..\ChampionshipAssist.Repositories\ChampionshipAssist.Repositories.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Views\Review\" />
-    <Folder Include="Views\Tournament\" />
-    <Folder Include="Views\User\" />
-  </ItemGroup>
-
 </Project>
