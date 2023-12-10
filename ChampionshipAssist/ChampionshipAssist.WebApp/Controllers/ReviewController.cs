@@ -7,9 +7,9 @@ namespace ChampionshipAssist.WebApp.Controllers
 {
     public class ReviewController : Controller
     {
-        private readonly ChampionsshipAssistDbContext _context;
+        private readonly ChampionshipAssistDbContext _context;
 
-        public ReviewController(ChampionsshipAssistDbContext context)
+        public ReviewController(ChampionshipAssistDbContext context)
         {
             _context = context;
         }

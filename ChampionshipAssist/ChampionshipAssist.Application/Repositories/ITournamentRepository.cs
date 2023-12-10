@@ -1,18 +1,13 @@
 ﻿using ChampionshipAssist.Core.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ChampionshipAssist.Repositories.Interfaces
 {
     public interface ITournamentRepository : ISave
     {
-        Tournament Get(int id);
-        IEnumerable<Tournament> GetAll();
-        void Add(Tournament obj);
+        Tournament Get(string id);
+        IEnumerable<Tournament> GetAll(string? username = null);
+        void Add(Tournament obj, string username);
         void Update(Tournament obj);
-        void Delete(int id);
+        void Delete(string id);
     }
 }

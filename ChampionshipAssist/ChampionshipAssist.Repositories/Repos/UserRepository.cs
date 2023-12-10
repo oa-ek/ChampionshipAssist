@@ -4,17 +4,12 @@ using ChampionshipAssist.Repositories.DTOs.User;
 using ChampionshipAssist.Repositories.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ChampionshipAssist.Repositories.Repos
 {
     public class UserRepository : IUserRepository
     {
-        private ChampionsshipAssistDbContext _context;
+        private ChampionshipAssistDbContext _context;
         private readonly UserManager<User> userManager;
         private readonly RoleManager<IdentityUser> roleManager;
 
@@ -58,6 +53,7 @@ namespace ChampionshipAssist.Repositories.Repos
                     Email = user.Email,
                     Name = user.UserName,
                     SteamLink = user.SteamLink,
+                    Bio = user.Bio,
                     IsConfirmed = user.EmailConfirmed,
                     Roles = roles.ToList()
                 };

@@ -1,35 +1,42 @@
 ﻿using ChampionshipAssist.Core.Context;
 using ChampionshipAssist.Core.Entities;
 using ChampionshipAssist.Repositories.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace ChampionshipAssist.Repositories.Repos
 {
     public class TournamentRepository : ITournamentRepository
     {
-        private ChampionsshipAssistDbContext _context;
+        private ChampionshipAssistDbContext _context;
 
-        public TournamentRepository(ChampionsshipAssistDbContext context)
+        public TournamentRepository(ChampionshipAssistDbContext context)
         {
             _context = context;
         }
-        public void Add(Tournament obj)
+        public void Add(Tournament obj, string username)
         {
+            obj.Organizer = _context.Users.First(x => x.UserName == username);
             _context.Tournaments.Add(obj);
             Save();
         }
 
-        public void Delete(int id)
+        public void Delete(string id)
         {
             throw new NotImplementedException();
         }
 
-        public Tournament Get(int id)
+        public Tournament Get(string id)
         {
-            return _context.Tournaments.Find(id);
+            return _context.Tournaments
+                .Include(x => x.Reviews)
+                .Include(x => x.Participants).First(x => x.Id == id);
         }
 
-        public IEnumerable<Tournament> GetAll()
+        public IEnumerable<Tournament> GetAll(string? username)
         {
+            if (username is null)
+                return _context.Tournaments.ToList();
+
             return _context.Tournaments.ToList();
         }
 

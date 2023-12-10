@@ -3021,24 +3021,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Таня\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\Eugene\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Таня\\Source\\Repos\\ChampionshipAssist\\ChampionshipAssist\\ChampionshipAssist.Core\\ChampionshipAssist.Domain.csproj",
+      "projectUniqueName": "C:\\Users\\Eugene\\Source\\Repos\\ChampionshipAssist\\ChampionshipAssist\\ChampionshipAssist.Core\\ChampionshipAssist.Domain.csproj",
       "projectName": "ChampionshipAssist.Domain",
-      "projectPath": "C:\\Users\\Таня\\Source\\Repos\\ChampionshipAssist\\ChampionshipAssist\\ChampionshipAssist.Core\\ChampionshipAssist.Domain.csproj",
-      "packagesPath": "C:\\Users\\Таня\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Таня\\Source\\Repos\\ChampionshipAssist\\ChampionshipAssist\\ChampionshipAssist.Core\\obj\\",
+      "projectPath": "C:\\Users\\Eugene\\Source\\Repos\\ChampionshipAssist\\ChampionshipAssist\\ChampionshipAssist.Core\\ChampionshipAssist.Domain.csproj",
+      "packagesPath": "C:\\Users\\Eugene\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Eugene\\Source\\Repos\\ChampionshipAssist\\ChampionshipAssist\\ChampionshipAssist.Core\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\Таня\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\Eugene\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

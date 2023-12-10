@@ -1,5 +1,57 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿﻿@using ChampionshipAssist.Core.Entities
+
+@model IEnumerable<Tournament>
+
 @{
+    ViewData["Title"] = "Розклад турнірів";
 }
+
+<div class="page-title">
+    <div class="row">
+        <div class="col-12 col-md-6 order-md-1 order-last">
+            <h3>@ViewData["Title"]</h3>
+            <p class="text-subtitle text-muted">
+                Список турнірів
+            </p>
+        </div>
+        <div class="col-12 col-md-6 order-md-2 order-first">
+            <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Головна</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Турніри</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            @if (User.Identity.IsAuthenticated)
+            {
+                <a href="/course/create" class="btn btn-warning">Створити турнір...</a>
+            }
+        </div>
+    </div>
+</div>
+
+<hr />
+<section class="section">
+    <div class="row">
+        <table class="table table-bordered table-responsive table-hover">
+            <tr>
+                <th>Назва турніру</th>
+                <th>Дата початку турніру</th>
+                <th>Дата кінця турніру</th>
+                <th>Опис</th>
+            </tr>
+            @foreach (var d in Model)
+            {
+                <tr>
+                    <td>@d.Name</td>
+                    <td>@d.StartDate</td>
+                    <td>@d.EndDate</td>
+                    <td>@d.ShortDesc</td>
+                </tr>
+            }
+        </table>
+    </div>
+</section>

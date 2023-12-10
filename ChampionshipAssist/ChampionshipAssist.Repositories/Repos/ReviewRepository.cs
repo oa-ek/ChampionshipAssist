@@ -6,9 +6,9 @@ namespace ChampionshipAssist.Repositories.Repos
 {
     public class ReviewRepository : IReviewRepository
     {
-        private ChampionsshipAssistDbContext _context;
+        private ChampionshipAssistDbContext _context;
 
-        public ReviewRepository(ChampionsshipAssistDbContext context)
+        public ReviewRepository(ChampionshipAssistDbContext context)
         {
             _context = context;
         }

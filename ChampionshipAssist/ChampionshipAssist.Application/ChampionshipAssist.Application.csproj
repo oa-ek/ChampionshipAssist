@@ -7,11 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Features\" />
+    <ProjectReference Include="..\ChampionshipAssist.Core\ChampionshipAssist.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ChampionshipAssist.Core\ChampionshipAssist.Domain.csproj" />
+    <Folder Include="Features\" />
   </ItemGroup>
 
 </Project>

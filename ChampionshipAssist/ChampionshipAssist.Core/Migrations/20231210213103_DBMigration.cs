@@ -36,6 +36,7 @@ namespace ChampionshipAssist.Domain.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     SteamLink = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Documents = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Bio = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IsBanned = table.Column<bool>(type: "bit", nullable: true),
                     IsVACBanned = table.Column<bool>(type: "bit", nullable: true),
                     BanDuration = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -66,16 +67,18 @@ namespace ChampionshipAssist.Domain.Migrations
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    OrganizerId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    WinnerId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     StartDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     EndDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Game = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ShortDesc = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LongDesc = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Rules = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IsOpenToUsers = table.Column<bool>(type: "bit", nullable: true),
                     IsOpenToCybersportsmen = table.Column<bool>(type: "bit", nullable: true),
                     IsPrivate = table.Column<bool>(type: "bit", nullable: true),
-                    VACBannedParticipantsAllowed = table.Column<bool>(type: "bit", nullable: true)
+                    VACBannedParticipantsAllowed = table.Column<bool>(type: "bit", nullable: true),
+                    OrganizerId = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -128,8 +131,8 @@ namespace ChampionshipAssist.Domain.Migrations
                 name: "AspNetUserLogins",
                 columns: table => new
                 {
-                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ProviderKey = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    LoginProvider = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    ProviderKey = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
                     ProviderDisplayName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
@@ -173,8 +176,8 @@ namespace ChampionshipAssist.Domain.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    LoginProvider = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
                     Value = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
@@ -242,29 +245,29 @@ namespace ChampionshipAssist.Domain.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "09d4bd83-f958-48eb-a51f-5012296fe2e5", null, "Cybersportsman", "CYBERSPORTSMAN" },
-                    { "4e645d52-5d6b-4ba9-a74b-0b1a9910c5c5", null, "User", "USER" },
-                    { "97e4db8a-728b-4428-9f30-5cd2a1ad86f5", null, "Admin", "ADMIN" }
+                    { "101e856d-0608-411c-85fd-507f6253a2bf", null, "User", "USER" },
+                    { "9bb1ba55-7bf2-45d5-bc2e-00147f0bdd52", null, "Cybersportsman", "CYBERSPORTSMAN" },
+                    { "b717d7b0-02e7-44a2-b05c-4126e085e762", null, "Admin", "ADMIN" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
-                columns: new[] { "Id", "AccessFailedCount", "BanCount", "BanDuration", "ConcurrencyStamp", "Discriminator", "Documents", "Email", "EmailConfirmed", "IsBanned", "IsVACBanned", "LockoutEnabled", "LockoutEnd", "Name", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "SteamLink", "TwoFactorEnabled", "UserName" },
+                columns: new[] { "Id", "AccessFailedCount", "BanCount", "BanDuration", "Bio", "ConcurrencyStamp", "Discriminator", "Documents", "Email", "EmailConfirmed", "IsBanned", "IsVACBanned", "LockoutEnabled", "LockoutEnd", "Name", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "SteamLink", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "3be42d94-1e2e-432d-971a-cae597376fa8", 0, 1, new DateTime(2023, 12, 10, 10, 1, 18, 612, DateTimeKind.Local).AddTicks(8119), "1c9df006-e3bc-40f6-8fee-a8a29f320a4a", "User", "", null, true, false, true, false, null, null, "USER@EXAMPLE.COM", "BUDDING", "AQAAAAIAAYagAAAAEA+XyhK7MiBkSdXGaQnlEnlwj7yUSBUH7dV7/5u34PdVZdIb4goenEPlTZR75T3/LQ==", null, false, "ebdbb16e-88dd-47b7-a6d5-46818a7971ee", "https://steamcommunity.com/id/Budding/", false, "Budding" },
-                    { "aa2d7dc4-76e9-41a2-badb-1d2c1bc1c38b", 0, 0, new DateTime(2023, 12, 10, 10, 1, 18, 612, DateTimeKind.Local).AddTicks(8138), "a7ce060d-78a7-4a7d-a3ab-75135396390a", "User", "", null, true, false, false, false, null, "Gabe", "CYBER@EXAMPLE.COM", "GABE", "AQAAAAIAAYagAAAAEEVW2cPF173qN4DBMsEXQZpaggW6VlgxUkLSYOaIG/ssrQhHimmqZD0c8eBEGORqvA==", null, false, "b01e8fd1-a79b-4345-8ae3-2b64d0f9eab0", "https://steamcommunity.com/id/Gabe/", false, null },
-                    { "e0f01b43-de9a-4b1f-bea5-9880c56090d5", 0, 0, new DateTime(2023, 12, 10, 10, 1, 18, 612, DateTimeKind.Local).AddTicks(8145), "ba879292-c4bf-4e5f-a69b-cca1352e1d3a", "User", "", null, true, false, false, false, null, "zatebon", "ADMIN@EXAMPLE.COM", "ZATEBON", "AQAAAAIAAYagAAAAEMc6Rwz6n86D3Jnbuq2ekH3HvmHHhNrtU0OontC/t3eHefxQy6gk5+Vz2Lk9CRX00w==", null, false, "387f29fd-c6a9-4c11-840e-0510a15e616f", "https://steamcommunity.com/id/zatebon/", false, null }
+                    { "3dc4f82a-7647-4ea3-94a4-87ff8b9a8c93", 0, 0, new DateTime(2023, 12, 10, 23, 31, 3, 148, DateTimeKind.Local).AddTicks(9054), "This user haven't set up this thing yet.", "cd49eef7-3afc-4b70-9d1d-56e86b473663", "User", "", "cyber@example.com", true, false, false, false, null, "Gabe", "CYBER@EXAMPLE.COM", "GABE", "AQAAAAIAAYagAAAAEK/LMM9giSiEVAAplx/DcgzlHuqa1hYRPBLm1LpHFSsUjFrH/fNFrnIzY38v8VgBXA==", null, false, "d6e8a779-d3fb-431d-b6e7-560e03a5b25b", "https://steamcommunity.com/id/Gabe/", false, "Gabe" },
+                    { "701dc543-0ea4-4d7f-bdf2-55484669b302", 0, 0, new DateTime(2023, 12, 10, 23, 31, 3, 148, DateTimeKind.Local).AddTicks(9062), "This user haven't set up this thing yet.", "7af54871-6a9e-4e82-8d48-9790fe0954ce", "User", "", "admin@example.com", true, false, false, false, null, "zatebon", "ADMIN@EXAMPLE.COM", "ZATEBON", "AQAAAAIAAYagAAAAENa9SSf2VUuvdUOmCVMRoduYcUXkUK9IJ5BwdLSF6KWXggONPRldlhsDD6N97KQnug==", null, false, "48b47159-1032-42df-afd1-2cbf8c2317e9", "https://steamcommunity.com/id/zatebon/", false, "zatebon" },
+                    { "a0e55193-a65f-4cf3-a090-8f25b7c8ce97", 0, 1, new DateTime(2023, 12, 10, 23, 31, 3, 148, DateTimeKind.Local).AddTicks(9002), "This user haven't set up this thing yet.", "6787b79b-15b9-4eb3-88d1-58ebe67be132", "User", "", "user@example.com", true, false, true, false, null, "Budding", "USER@EXAMPLE.COM", "BUDDING", "AQAAAAIAAYagAAAAEORV+UuuFVJalpLjkQ9Xncu+pMY3QhImQEmplBtXhJA+FJXGNn7gY5nw9oyOqjfy/g==", null, false, "23dc5fad-5ae9-4686-8b19-fe1bd968ba29", "https://steamcommunity.com/id/Budding/", false, "Budding" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Tournaments",
-                columns: new[] { "Id", "EndDate", "IsOpenToCybersportsmen", "IsOpenToUsers", "IsPrivate", "LongDesc", "Name", "OrganizerId", "Rules", "ShortDesc", "StartDate", "VACBannedParticipantsAllowed" },
+                columns: new[] { "Id", "EndDate", "Game", "IsOpenToCybersportsmen", "IsOpenToUsers", "IsPrivate", "LongDesc", "Name", "OrganizerId", "Rules", "ShortDesc", "StartDate", "VACBannedParticipantsAllowed", "WinnerId" },
                 values: new object[,]
                 {
-                    { "43e0540a-b10d-447b-92f6-cc665ff8ae14", new DateTime(2023, 12, 10, 10, 1, 18, 872, DateTimeKind.Local).AddTicks(5016), true, false, false, "Long description.", "Test2", null, "Test1", "Short description.", new DateTime(2023, 12, 10, 10, 1, 18, 872, DateTimeKind.Local).AddTicks(5015), null },
-                    { "7d4b5a3a-0ada-4db8-b43c-99e81aefbe56", new DateTime(2023, 12, 10, 10, 1, 18, 872, DateTimeKind.Local).AddTicks(5019), false, true, false, "Long description.", "Test3", null, "Test1", "Short description.", new DateTime(2023, 12, 10, 10, 1, 18, 872, DateTimeKind.Local).AddTicks(5019), null },
-                    { "9c7272cb-b425-4a3a-8b26-49964ea20b81", new DateTime(2023, 12, 10, 10, 1, 18, 872, DateTimeKind.Local).AddTicks(5011), true, true, false, "Long description.", "Test1", null, "Test1", "Short description.", new DateTime(2023, 12, 10, 10, 1, 18, 872, DateTimeKind.Local).AddTicks(4979), null }
+                    { "6bd4a72d-b4b4-47f5-aa9b-067bb7303f46", new DateTime(2024, 12, 24, 23, 31, 3, 389, DateTimeKind.Local).AddTicks(6540), "Counter-Strike: Global Offensive", true, false, false, "Long description.", "IEM Katowice 2024", "a0e55193-a65f-4cf3-a090-8f25b7c8ce97", "Test1", "Big tournament for cybersportsmen only.", new DateTime(2024, 12, 10, 23, 31, 3, 389, DateTimeKind.Local).AddTicks(6532), false, null },
+                    { "832596c8-5e74-483d-ae22-eac37fff332c", new DateTime(2023, 12, 24, 23, 31, 3, 389, DateTimeKind.Local).AddTicks(6522), "Counter-Strike 1.6", true, true, false, "Long description.", "Winter Turnir 2023", "3dc4f82a-7647-4ea3-94a4-87ff8b9a8c93", "Test1", "Small tournament", new DateTime(2023, 12, 10, 23, 31, 3, 389, DateTimeKind.Local).AddTicks(6469), false, null },
+                    { "b47efd7e-5312-46da-81ac-2ff9d3676c87", new DateTime(2023, 12, 10, 23, 32, 3, 389, DateTimeKind.Local).AddTicks(6547), "Counter-Strike 1.6", false, true, false, "Long description.", "ChampionshipAssist test tournament", "a0e55193-a65f-4cf3-a090-8f25b7c8ce97", "Test1", "Short description.", new DateTime(2023, 12, 10, 23, 31, 3, 389, DateTimeKind.Local).AddTicks(6545), true, "a0e55193-a65f-4cf3-a090-8f25b7c8ce97" }
                 });
 
             migrationBuilder.InsertData(
@@ -272,11 +275,11 @@ namespace ChampionshipAssist.Domain.Migrations
                 columns: new[] { "RoleId", "UserId" },
                 values: new object[,]
                 {
-                    { "09d4bd83-f958-48eb-a51f-5012296fe2e5", "3be42d94-1e2e-432d-971a-cae597376fa8" },
-                    { "4e645d52-5d6b-4ba9-a74b-0b1a9910c5c5", "3be42d94-1e2e-432d-971a-cae597376fa8" },
-                    { "09d4bd83-f958-48eb-a51f-5012296fe2e5", "aa2d7dc4-76e9-41a2-badb-1d2c1bc1c38b" },
-                    { "09d4bd83-f958-48eb-a51f-5012296fe2e5", "e0f01b43-de9a-4b1f-bea5-9880c56090d5" },
-                    { "97e4db8a-728b-4428-9f30-5cd2a1ad86f5", "e0f01b43-de9a-4b1f-bea5-9880c56090d5" }
+                    { "9bb1ba55-7bf2-45d5-bc2e-00147f0bdd52", "3dc4f82a-7647-4ea3-94a4-87ff8b9a8c93" },
+                    { "9bb1ba55-7bf2-45d5-bc2e-00147f0bdd52", "701dc543-0ea4-4d7f-bdf2-55484669b302" },
+                    { "b717d7b0-02e7-44a2-b05c-4126e085e762", "701dc543-0ea4-4d7f-bdf2-55484669b302" },
+                    { "101e856d-0608-411c-85fd-507f6253a2bf", "a0e55193-a65f-4cf3-a090-8f25b7c8ce97" },
+                    { "9bb1ba55-7bf2-45d5-bc2e-00147f0bdd52", "a0e55193-a65f-4cf3-a090-8f25b7c8ce97" }
                 });
 
             migrationBuilder.InsertData(
@@ -284,9 +287,10 @@ namespace ChampionshipAssist.Domain.Migrations
                 columns: new[] { "Id", "Commentary", "Rating", "TournamentId", "UserId" },
                 values: new object[,]
                 {
-                    { "1ee17889-a012-407a-89bc-a4c8e8547dac", "Test2", 4.0, "43e0540a-b10d-447b-92f6-cc665ff8ae14", "aa2d7dc4-76e9-41a2-badb-1d2c1bc1c38b" },
-                    { "433a3cbd-8e83-402b-baf6-48c8c876c458", "Test3", 3.0, "7d4b5a3a-0ada-4db8-b43c-99e81aefbe56", "3be42d94-1e2e-432d-971a-cae597376fa8" },
-                    { "5347ce16-4dc5-4674-bbbc-5d908f9b8686", "Test1", 5.0, "9c7272cb-b425-4a3a-8b26-49964ea20b81", "e0f01b43-de9a-4b1f-bea5-9880c56090d5" }
+                    { "8225d2ae-ba5b-46b7-be48-182e1f11b4f5", "Could be worse.", 3.0, "b47efd7e-5312-46da-81ac-2ff9d3676c87", "a0e55193-a65f-4cf3-a090-8f25b7c8ce97" },
+                    { "ce540c75-9781-46e0-aef1-c37234a4d1cc", "Great tournament so far.", 5.0, "832596c8-5e74-483d-ae22-eac37fff332c", "701dc543-0ea4-4d7f-bdf2-55484669b302" },
+                    { "d597e7e0-c52b-4092-92c6-fbddfbbdd243", "Worst one so far.", 1.0, "b47efd7e-5312-46da-81ac-2ff9d3676c87", "3dc4f82a-7647-4ea3-94a4-87ff8b9a8c93" },
+                    { "fb596014-a95b-4073-aaf9-a55dda519043", "Could be better a bit.", 4.0, "6bd4a72d-b4b4-47f5-aa9b-067bb7303f46", "3dc4f82a-7647-4ea3-94a4-87ff8b9a8c93" }
                 });
 
             migrationBuilder.CreateIndex(

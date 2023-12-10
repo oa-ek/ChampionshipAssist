@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ChampionshipAssist.Domain.Migrations
 {
-    [DbContext(typeof(ChampionsshipAssistDbContext))]
-    [Migration("20231210070119_DBMigration")]
+    [DbContext(typeof(ChampionshipAssistDbContext))]
+    [Migration("20231210213103_DBMigration")]
     partial class DBMigration
     {
         /// <inheritdoc />
@@ -53,27 +53,35 @@ namespace ChampionshipAssist.Domain.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "5347ce16-4dc5-4674-bbbc-5d908f9b8686",
-                            Commentary = "Test1",
+                            Id = "ce540c75-9781-46e0-aef1-c37234a4d1cc",
+                            Commentary = "Great tournament so far.",
                             Rating = 5.0,
-                            TournamentId = "9c7272cb-b425-4a3a-8b26-49964ea20b81",
-                            UserId = "e0f01b43-de9a-4b1f-bea5-9880c56090d5"
+                            TournamentId = "832596c8-5e74-483d-ae22-eac37fff332c",
+                            UserId = "701dc543-0ea4-4d7f-bdf2-55484669b302"
                         },
                         new
                         {
-                            Id = "1ee17889-a012-407a-89bc-a4c8e8547dac",
-                            Commentary = "Test2",
+                            Id = "fb596014-a95b-4073-aaf9-a55dda519043",
+                            Commentary = "Could be better a bit.",
                             Rating = 4.0,
-                            TournamentId = "43e0540a-b10d-447b-92f6-cc665ff8ae14",
-                            UserId = "aa2d7dc4-76e9-41a2-badb-1d2c1bc1c38b"
+                            TournamentId = "6bd4a72d-b4b4-47f5-aa9b-067bb7303f46",
+                            UserId = "3dc4f82a-7647-4ea3-94a4-87ff8b9a8c93"
                         },
                         new
                         {
-                            Id = "433a3cbd-8e83-402b-baf6-48c8c876c458",
-                            Commentary = "Test3",
+                            Id = "8225d2ae-ba5b-46b7-be48-182e1f11b4f5",
+                            Commentary = "Could be worse.",
                             Rating = 3.0,
-                            TournamentId = "7d4b5a3a-0ada-4db8-b43c-99e81aefbe56",
-                            UserId = "3be42d94-1e2e-432d-971a-cae597376fa8"
+                            TournamentId = "b47efd7e-5312-46da-81ac-2ff9d3676c87",
+                            UserId = "a0e55193-a65f-4cf3-a090-8f25b7c8ce97"
+                        },
+                        new
+                        {
+                            Id = "d597e7e0-c52b-4092-92c6-fbddfbbdd243",
+                            Commentary = "Worst one so far.",
+                            Rating = 1.0,
+                            TournamentId = "b47efd7e-5312-46da-81ac-2ff9d3676c87",
+                            UserId = "3dc4f82a-7647-4ea3-94a4-87ff8b9a8c93"
                         });
                 });
 
@@ -84,6 +92,9 @@ namespace ChampionshipAssist.Domain.Migrations
 
                     b.Property<DateTime?>("EndDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("Game")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool?>("IsOpenToCybersportsmen")
                         .HasColumnType("bit");
@@ -115,6 +126,9 @@ namespace ChampionshipAssist.Domain.Migrations
                     b.Property<bool?>("VACBannedParticipantsAllowed")
                         .HasColumnType("bit");
 
+                    b.Property<string>("WinnerId")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.ToTable("Tournaments");
@@ -122,42 +136,52 @@ namespace ChampionshipAssist.Domain.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "9c7272cb-b425-4a3a-8b26-49964ea20b81",
-                            EndDate = new DateTime(2023, 12, 10, 10, 1, 18, 872, DateTimeKind.Local).AddTicks(5011),
+                            Id = "832596c8-5e74-483d-ae22-eac37fff332c",
+                            EndDate = new DateTime(2023, 12, 24, 23, 31, 3, 389, DateTimeKind.Local).AddTicks(6522),
+                            Game = "Counter-Strike 1.6",
                             IsOpenToCybersportsmen = true,
                             IsOpenToUsers = true,
                             IsPrivate = false,
                             LongDesc = "Long description.",
-                            Name = "Test1",
+                            Name = "Winter Turnir 2023",
+                            OrganizerId = "3dc4f82a-7647-4ea3-94a4-87ff8b9a8c93",
                             Rules = "Test1",
-                            ShortDesc = "Short description.",
-                            StartDate = new DateTime(2023, 12, 10, 10, 1, 18, 872, DateTimeKind.Local).AddTicks(4979)
+                            ShortDesc = "Small tournament",
+                            StartDate = new DateTime(2023, 12, 10, 23, 31, 3, 389, DateTimeKind.Local).AddTicks(6469),
+                            VACBannedParticipantsAllowed = false
                         },
                         new
                         {
-                            Id = "43e0540a-b10d-447b-92f6-cc665ff8ae14",
-                            EndDate = new DateTime(2023, 12, 10, 10, 1, 18, 872, DateTimeKind.Local).AddTicks(5016),
+                            Id = "6bd4a72d-b4b4-47f5-aa9b-067bb7303f46",
+                            EndDate = new DateTime(2024, 12, 24, 23, 31, 3, 389, DateTimeKind.Local).AddTicks(6540),
+                            Game = "Counter-Strike: Global Offensive",
                             IsOpenToCybersportsmen = true,
                             IsOpenToUsers = false,
                             IsPrivate = false,
                             LongDesc = "Long description.",
-                            Name = "Test2",
+                            Name = "IEM Katowice 2024",
+                            OrganizerId = "a0e55193-a65f-4cf3-a090-8f25b7c8ce97",
                             Rules = "Test1",
-                            ShortDesc = "Short description.",
-                            StartDate = new DateTime(2023, 12, 10, 10, 1, 18, 872, DateTimeKind.Local).AddTicks(5015)
+                            ShortDesc = "Big tournament for cybersportsmen only.",
+                            StartDate = new DateTime(2024, 12, 10, 23, 31, 3, 389, DateTimeKind.Local).AddTicks(6532),
+                            VACBannedParticipantsAllowed = false
                         },
                         new
                         {
-                            Id = "7d4b5a3a-0ada-4db8-b43c-99e81aefbe56",
-                            EndDate = new DateTime(2023, 12, 10, 10, 1, 18, 872, DateTimeKind.Local).AddTicks(5019),
+                            Id = "b47efd7e-5312-46da-81ac-2ff9d3676c87",
+                            EndDate = new DateTime(2023, 12, 10, 23, 32, 3, 389, DateTimeKind.Local).AddTicks(6547),
+                            Game = "Counter-Strike 1.6",
                             IsOpenToCybersportsmen = false,
                             IsOpenToUsers = true,
                             IsPrivate = false,
                             LongDesc = "Long description.",
-                            Name = "Test3",
+                            Name = "ChampionshipAssist test tournament",
+                            OrganizerId = "a0e55193-a65f-4cf3-a090-8f25b7c8ce97",
                             Rules = "Test1",
                             ShortDesc = "Short description.",
-                            StartDate = new DateTime(2023, 12, 10, 10, 1, 18, 872, DateTimeKind.Local).AddTicks(5019)
+                            StartDate = new DateTime(2023, 12, 10, 23, 31, 3, 389, DateTimeKind.Local).AddTicks(6545),
+                            VACBannedParticipantsAllowed = true,
+                            WinnerId = "a0e55193-a65f-4cf3-a090-8f25b7c8ce97"
                         });
                 });
 
@@ -190,19 +214,19 @@ namespace ChampionshipAssist.Domain.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "97e4db8a-728b-4428-9f30-5cd2a1ad86f5",
+                            Id = "b717d7b0-02e7-44a2-b05c-4126e085e762",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "09d4bd83-f958-48eb-a51f-5012296fe2e5",
+                            Id = "9bb1ba55-7bf2-45d5-bc2e-00147f0bdd52",
                             Name = "Cybersportsman",
                             NormalizedName = "CYBERSPORTSMAN"
                         },
                         new
                         {
-                            Id = "4e645d52-5d6b-4ba9-a74b-0b1a9910c5c5",
+                            Id = "101e856d-0608-411c-85fd-507f6253a2bf",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -334,10 +358,12 @@ namespace ChampionshipAssist.Domain.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("ProviderKey")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -370,28 +396,28 @@ namespace ChampionshipAssist.Domain.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "e0f01b43-de9a-4b1f-bea5-9880c56090d5",
-                            RoleId = "97e4db8a-728b-4428-9f30-5cd2a1ad86f5"
+                            UserId = "701dc543-0ea4-4d7f-bdf2-55484669b302",
+                            RoleId = "b717d7b0-02e7-44a2-b05c-4126e085e762"
                         },
                         new
                         {
-                            UserId = "e0f01b43-de9a-4b1f-bea5-9880c56090d5",
-                            RoleId = "09d4bd83-f958-48eb-a51f-5012296fe2e5"
+                            UserId = "701dc543-0ea4-4d7f-bdf2-55484669b302",
+                            RoleId = "9bb1ba55-7bf2-45d5-bc2e-00147f0bdd52"
                         },
                         new
                         {
-                            UserId = "aa2d7dc4-76e9-41a2-badb-1d2c1bc1c38b",
-                            RoleId = "09d4bd83-f958-48eb-a51f-5012296fe2e5"
+                            UserId = "3dc4f82a-7647-4ea3-94a4-87ff8b9a8c93",
+                            RoleId = "9bb1ba55-7bf2-45d5-bc2e-00147f0bdd52"
                         },
                         new
                         {
-                            UserId = "3be42d94-1e2e-432d-971a-cae597376fa8",
-                            RoleId = "09d4bd83-f958-48eb-a51f-5012296fe2e5"
+                            UserId = "a0e55193-a65f-4cf3-a090-8f25b7c8ce97",
+                            RoleId = "9bb1ba55-7bf2-45d5-bc2e-00147f0bdd52"
                         },
                         new
                         {
-                            UserId = "3be42d94-1e2e-432d-971a-cae597376fa8",
-                            RoleId = "4e645d52-5d6b-4ba9-a74b-0b1a9910c5c5"
+                            UserId = "a0e55193-a65f-4cf3-a090-8f25b7c8ce97",
+                            RoleId = "101e856d-0608-411c-85fd-507f6253a2bf"
                         });
                 });
 
@@ -401,10 +427,12 @@ namespace ChampionshipAssist.Domain.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
@@ -439,6 +467,9 @@ namespace ChampionshipAssist.Domain.Migrations
                     b.Property<DateTime?>("BanDuration")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Bio")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Documents")
                         .HasColumnType("nvarchar(max)");
 
@@ -459,19 +490,22 @@ namespace ChampionshipAssist.Domain.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "e0f01b43-de9a-4b1f-bea5-9880c56090d5",
+                            Id = "701dc543-0ea4-4d7f-bdf2-55484669b302",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ba879292-c4bf-4e5f-a69b-cca1352e1d3a",
+                            ConcurrencyStamp = "7af54871-6a9e-4e82-8d48-9790fe0954ce",
+                            Email = "admin@example.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@EXAMPLE.COM",
                             NormalizedUserName = "ZATEBON",
-                            PasswordHash = "AQAAAAIAAYagAAAAEMc6Rwz6n86D3Jnbuq2ekH3HvmHHhNrtU0OontC/t3eHefxQy6gk5+Vz2Lk9CRX00w==",
+                            PasswordHash = "AQAAAAIAAYagAAAAENa9SSf2VUuvdUOmCVMRoduYcUXkUK9IJ5BwdLSF6KWXggONPRldlhsDD6N97KQnug==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "387f29fd-c6a9-4c11-840e-0510a15e616f",
+                            SecurityStamp = "48b47159-1032-42df-afd1-2cbf8c2317e9",
                             TwoFactorEnabled = false,
+                            UserName = "zatebon",
                             BanCount = 0,
-                            BanDuration = new DateTime(2023, 12, 10, 10, 1, 18, 612, DateTimeKind.Local).AddTicks(8145),
+                            BanDuration = new DateTime(2023, 12, 10, 23, 31, 3, 148, DateTimeKind.Local).AddTicks(9062),
+                            Bio = "This user haven't set up this thing yet.",
                             Documents = "",
                             IsBanned = false,
                             IsVACBanned = false,
@@ -480,19 +514,22 @@ namespace ChampionshipAssist.Domain.Migrations
                         },
                         new
                         {
-                            Id = "aa2d7dc4-76e9-41a2-badb-1d2c1bc1c38b",
+                            Id = "3dc4f82a-7647-4ea3-94a4-87ff8b9a8c93",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "a7ce060d-78a7-4a7d-a3ab-75135396390a",
+                            ConcurrencyStamp = "cd49eef7-3afc-4b70-9d1d-56e86b473663",
+                            Email = "cyber@example.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "CYBER@EXAMPLE.COM",
                             NormalizedUserName = "GABE",
-                            PasswordHash = "AQAAAAIAAYagAAAAEEVW2cPF173qN4DBMsEXQZpaggW6VlgxUkLSYOaIG/ssrQhHimmqZD0c8eBEGORqvA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEK/LMM9giSiEVAAplx/DcgzlHuqa1hYRPBLm1LpHFSsUjFrH/fNFrnIzY38v8VgBXA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "b01e8fd1-a79b-4345-8ae3-2b64d0f9eab0",
+                            SecurityStamp = "d6e8a779-d3fb-431d-b6e7-560e03a5b25b",
                             TwoFactorEnabled = false,
+                            UserName = "Gabe",
                             BanCount = 0,
-                            BanDuration = new DateTime(2023, 12, 10, 10, 1, 18, 612, DateTimeKind.Local).AddTicks(8138),
+                            BanDuration = new DateTime(2023, 12, 10, 23, 31, 3, 148, DateTimeKind.Local).AddTicks(9054),
+                            Bio = "This user haven't set up this thing yet.",
                             Documents = "",
                             IsBanned = false,
                             IsVACBanned = false,
@@ -501,23 +538,26 @@ namespace ChampionshipAssist.Domain.Migrations
                         },
                         new
                         {
-                            Id = "3be42d94-1e2e-432d-971a-cae597376fa8",
+                            Id = "a0e55193-a65f-4cf3-a090-8f25b7c8ce97",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "1c9df006-e3bc-40f6-8fee-a8a29f320a4a",
+                            ConcurrencyStamp = "6787b79b-15b9-4eb3-88d1-58ebe67be132",
+                            Email = "user@example.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "USER@EXAMPLE.COM",
                             NormalizedUserName = "BUDDING",
-                            PasswordHash = "AQAAAAIAAYagAAAAEA+XyhK7MiBkSdXGaQnlEnlwj7yUSBUH7dV7/5u34PdVZdIb4goenEPlTZR75T3/LQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEORV+UuuFVJalpLjkQ9Xncu+pMY3QhImQEmplBtXhJA+FJXGNn7gY5nw9oyOqjfy/g==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "ebdbb16e-88dd-47b7-a6d5-46818a7971ee",
+                            SecurityStamp = "23dc5fad-5ae9-4686-8b19-fe1bd968ba29",
                             TwoFactorEnabled = false,
                             UserName = "Budding",
                             BanCount = 1,
-                            BanDuration = new DateTime(2023, 12, 10, 10, 1, 18, 612, DateTimeKind.Local).AddTicks(8119),
+                            BanDuration = new DateTime(2023, 12, 10, 23, 31, 3, 148, DateTimeKind.Local).AddTicks(9002),
+                            Bio = "This user haven't set up this thing yet.",
                             Documents = "",
                             IsBanned = false,
                             IsVACBanned = true,
+                            Name = "Budding",
                             SteamLink = "https://steamcommunity.com/id/Budding/"
                         });
                 });

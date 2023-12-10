@@ -4,12 +4,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ChampionshipAssist.Core.Context
 {
-    public class ChampionsshipAssistDbContext : IdentityDbContext
+    public class ChampionshipAssistDbContext : IdentityDbContext
     {
-        public ChampionsshipAssistDbContext() 
+        public ChampionshipAssistDbContext() 
         {
         }
-        public ChampionsshipAssistDbContext(DbContextOptions<ChampionsshipAssistDbContext> options)
+        public ChampionshipAssistDbContext(DbContextOptions<ChampionshipAssistDbContext> options)
             : base(options)
         {
         }
@@ -20,7 +20,7 @@ namespace ChampionshipAssist.Core.Context
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=DESKTOP-KSFBBP6\\SQLEXPRESS;Database=ChampionsshipAssistDB;Integrated Security=True;Encrypt=True;TrustServerCertificate=True");
+            optionsBuilder.UseSqlServer("Server=DESKTOP-3E83AFL\\SQLEXPRESS;Database=ChampionshipAssistDB;Integrated Security=True;Encrypt=True;TrustServerCertificate=True");
             base.OnConfiguring(optionsBuilder);
         }
 
