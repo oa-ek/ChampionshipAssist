@@ -42,7 +42,7 @@ namespace ChampionshipAssist.WebApp.Controllers
         }
 
         // Операція читання (інформація про конкретний турнір)
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(string? id)
         {
             if (id == null)
             {
@@ -59,7 +59,7 @@ namespace ChampionshipAssist.WebApp.Controllers
         }
 
         // Операція оновлення
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(string? id)
         {
             if (id == null)
             {
@@ -77,7 +77,7 @@ namespace ChampionshipAssist.WebApp.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, Tournament tournament)
+        public async Task<IActionResult> Edit(string id, Tournament tournament)
         {
             if (id != tournament.Id)
             {
@@ -108,7 +108,7 @@ namespace ChampionshipAssist.WebApp.Controllers
         }
 
         // Операція видалення
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(string? id)
         {
             if (id == null)
             {
@@ -126,7 +126,7 @@ namespace ChampionshipAssist.WebApp.Controllers
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(string id)
         {
             var tournament = await _context.Tournaments.FindAsync(id);
             _context.Tournaments.Remove(tournament);
@@ -134,7 +134,7 @@ namespace ChampionshipAssist.WebApp.Controllers
             return RedirectToAction("Index");
         }
 
-        private bool TournamentExists(int id)
+        private bool TournamentExists(string id)
         {
             return _context.Tournaments.Any(t => t.Id == id);
         }

@@ -22,7 +22,7 @@
             CreatedTournaments.Add(tournament);
         }
 
-        public void DeleteTournament(int id)
+        public void DeleteTournament(string id)
         {
             var tournamentToRemove = CreatedTournaments.FirstOrDefault(t => t.Id == id);
             if (tournamentToRemove != null)
@@ -31,7 +31,7 @@
             }
         }
 
-        public void EditTournament(int id, Tournament updatedTournament)
+        public void EditTournament(string id, Tournament updatedTournament)
         {
             var existingTournament = CreatedTournaments.FirstOrDefault(t => t.Id == id);
             if (existingTournament != null)

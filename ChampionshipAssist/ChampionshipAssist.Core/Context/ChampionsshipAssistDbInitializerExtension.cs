@@ -8,47 +8,55 @@ namespace ChampionshipAssist.Core.Context
     {
         public static void Seed(this ModelBuilder builder)
         {
-            seedReviews(builder);
-            seedTournaments(builder);
-            (string admId, string stdId, string teachId) = seedUsersAndRoles(builder);
+            string reviewId1 = Guid.NewGuid().ToString();
+            string reviewId2 = Guid.NewGuid().ToString();
+            string reviewId3 = Guid.NewGuid().ToString();
+
+            string tournamentId1 = Guid.NewGuid().ToString();
+            string tournamentId2 = Guid.NewGuid().ToString();
+            string tournamentId3 = Guid.NewGuid().ToString();
+
+            (string adminId, string cybersportsmanId, string userId) = seedUsersAndRoles(builder);
+            seedTournaments(builder, tournamentId1, tournamentId2, tournamentId3);
+            seedReviews(builder, tournamentId1, tournamentId2, tournamentId3, reviewId1, reviewId2, reviewId3, adminId, cybersportsmanId, userId);
         }
 
-        private static void seedReviews(ModelBuilder builder)
+        private static void seedReviews(ModelBuilder builder, string tID1, string tID2, string tID3, string rID1, string rID2, string rID3, string uID1, string uID2, string uID3)
         {
             builder.Entity<Review>().HasData(
                 new Review
                 {
-                    Id = 1,
-                    TournamentId = "1",
-                    UserId = "1",
+                    Id = rID1,
+                    TournamentId = tID1,
+                    UserId = uID1,
                     Commentary = "Test1",
                     Rating = 5.0
                 },
                 new Review
                 {
-                    Id = 2,
-                    TournamentId = "2",
-                    UserId = "1",
+                    Id = rID2,
+                    TournamentId = tID2,
+                    UserId = uID2,
                     Commentary = "Test2",
                     Rating = 4.0
                 },
                 new Review
                 {
-                    Id = 3,
-                    TournamentId = "3",
-                    UserId = "1",
+                    Id = rID3,
+                    TournamentId = tID3,
+                    UserId = uID3,
                     Commentary = "Test3",
                     Rating = 3.0
                 }
                 );
         }
 
-        private static void seedTournaments(ModelBuilder builder)
+        private static void seedTournaments(ModelBuilder builder, string tID1, string tID2, string tID3)
         {
             builder.Entity<Tournament>().HasData(
                 new Tournament
                 {
-                    Id = 1,
+                    Id = tID1,
                     Name = "Test1",
                     StartDate = DateTime.Now,
                     EndDate = DateTime.Now,
@@ -61,7 +69,7 @@ namespace ChampionshipAssist.Core.Context
                 },
                 new Tournament
                 {
-                    Id = 2,
+                    Id = tID2,
                     Name = "Test2",
                     StartDate = DateTime.Now,
                     EndDate = DateTime.Now,
@@ -74,7 +82,7 @@ namespace ChampionshipAssist.Core.Context
                 },
                 new Tournament
                 {
-                    Id = 3,
+                    Id = tID3,
                     Name = "Test3",
                     StartDate = DateTime.Now,
                     EndDate = DateTime.Now,

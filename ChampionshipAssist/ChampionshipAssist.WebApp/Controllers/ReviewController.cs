@@ -41,7 +41,7 @@ namespace ChampionshipAssist.WebApp.Controllers
         }
 
         // Операція читання (інформація про конкретний турнір)
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(string? id)
         {
             if (id == null)
             {
@@ -58,7 +58,7 @@ namespace ChampionshipAssist.WebApp.Controllers
         }
 
         // Операція оновлення
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(string? id)
         {
             if (id == null)
             {
@@ -76,7 +76,7 @@ namespace ChampionshipAssist.WebApp.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, Review review)
+        public async Task<IActionResult> Edit(string id, Review review)
         {
             if (id != review.Id)
             {
@@ -107,7 +107,7 @@ namespace ChampionshipAssist.WebApp.Controllers
         }
 
         // Операція видалення
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(string? id)
         {
             if (id == null)
             {
@@ -133,7 +133,7 @@ namespace ChampionshipAssist.WebApp.Controllers
             return RedirectToAction("Index");
         }
 
-        private bool ReviewExists(int id)
+        private bool ReviewExists(string id)
         {
             return _context.Reviews.Any(t => t.Id == id);
         }
