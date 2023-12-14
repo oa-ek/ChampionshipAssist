@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ChampionshipAssist.Repositories.DTOs.User
+namespace ChampionshipAssist.Application.DTOs
 {
     public class UserCreateDto
     {

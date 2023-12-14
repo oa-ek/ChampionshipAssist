@@ -1,4 +1,4 @@
-﻿namespace ChampionshipAssist.Repositories.DTOs.User
+﻿namespace ChampionshipAssist.Application.DTOs
 {
     public class UserDto
     {

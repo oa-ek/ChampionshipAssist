@@ -11,7 +11,7 @@
         "projectName": "ChampionshipAssist.Application",
         "projectPath": "C:\\Users\\Eugene\\Source\\Repos\\ChampionshipAssist\\ChampionshipAssist\\ChampionshipAssist.Application\\ChampionshipAssist.Application.csproj",
         "packagesPath": "C:\\Users\\Eugene\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Eugene\\Source\\Repos\\ChampionshipAssist\\ChampionshipAssist\\ChampionshipAssist.Application\\obj\\",
+        "outputPath": "C:\\Users\\Eugene\\source\\repos\\ChampionshipAssist\\ChampionshipAssist\\ChampionshipAssist.Application\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Eugene\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -70,7 +70,7 @@
         "projectName": "ChampionshipAssist.Domain",
         "projectPath": "C:\\Users\\Eugene\\Source\\Repos\\ChampionshipAssist\\ChampionshipAssist\\ChampionshipAssist.Core\\ChampionshipAssist.Domain.csproj",
         "packagesPath": "C:\\Users\\Eugene\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Eugene\\Source\\Repos\\ChampionshipAssist\\ChampionshipAssist\\ChampionshipAssist.Core\\obj\\",
+        "outputPath": "C:\\Users\\Eugene\\source\\repos\\ChampionshipAssist\\ChampionshipAssist\\ChampionshipAssist.Core\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Eugene\\AppData\\Roaming\\NuGet\\NuGet.Config",

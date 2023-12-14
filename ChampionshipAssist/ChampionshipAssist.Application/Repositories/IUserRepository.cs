@@ -1,4 +1,4 @@
-﻿using ChampionshipAssist.Repositories.DTOs.User;
+﻿using ChampionshipAssist.Application.DTOs;
 
 namespace ChampionshipAssist.Repositories.Interfaces
 {

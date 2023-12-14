@@ -1,11 +1,11 @@
-﻿using ChampionshipAssist.Repositories.DTOs.User;
+﻿using ChampionshipAssist.Application.DTOs;
 using ChampionshipAssist.Repositories.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ChampionshipAssist.WebApp.Controllers
 {
-        [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
         public class UserController : Controller
         {
             private readonly IUserRepository userRepository;

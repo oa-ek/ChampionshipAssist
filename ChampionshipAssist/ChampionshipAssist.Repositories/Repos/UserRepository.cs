@@ -1,6 +1,6 @@
-﻿using ChampionshipAssist.Core.Context;
+﻿using ChampionshipAssist.Application.DTOs;
+using ChampionshipAssist.Core.Context;
 using ChampionshipAssist.Core.Entities;
-using ChampionshipAssist.Repositories.DTOs.User;
 using ChampionshipAssist.Repositories.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
