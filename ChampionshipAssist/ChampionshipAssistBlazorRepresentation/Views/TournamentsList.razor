@@ -1,0 +1,254 @@
+﻿@page "/tournaments"
+@using ChampionshipAssistBlazorRepresentation.Application
+@using ChampionshipAssistBlazorRepresentation.Services
+@inject TournamentService TournamentService
+@inject NavigationManager NavigationManager
+
+<h3>Tournaments</h3>
+
+@if (tournaments == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <button class="btn btn-primary" @onclick="ShowAddForm">Add Tournament</button>
+
+    @if (showAddForm)
+    {
+        <EditForm Model="@newTournament" OnValidSubmit="HandleAdd">
+            <p>
+                <label>Name: </label>
+                <InputText @bind-Value="newTournament.Name" />
+            </p>
+            <p>
+                <label>Start Date: </label>
+                <InputDate @bind-Value="newTournament.StartDate" />
+            </p>
+            <p>
+                <label>End Date: </label>
+                <InputDate @bind-Value="newTournament.EndDate" />
+            </p>
+            <p>
+                <label>Short Description: </label>
+                <InputText @bind-Value="newTournament.ShortDesc" />
+            </p>
+            <p>
+                <label>Long Description: </label>
+                <InputTextArea @bind-Value="newTournament.LongDesc" />
+            </p>
+            <p>
+                <label>Rules: </label>
+                <InputTextArea @bind-Value="newTournament.Rules" />
+            </p>
+            <p>
+                <label>Private: </label>
+                <InputCheckbox @bind-Value="newTournament.IsPrivate" />
+            </p>
+            <p>
+                <label>Open to Cybersportsmen: </label>
+                <InputCheckbox @bind-Value="newTournament.IsOpenToCybersportsmen" />
+            </p>
+            <p>
+                <label>Open to Users: </label>
+                <InputCheckbox @bind-Value="newTournament.IsOpenToUsers" />
+            </p>
+            <p>
+                <label>VAC Banned users allowed: </label>
+                <InputCheckbox @bind-Value="newTournament.VACBannedParticipantsAllowed" />
+            </p>
+            <p>
+                <label>Organizer ID: </label>
+                <InputText @bind-Value="newTournament.OrganizerId" />
+            </p>
+            <p>
+                <label>Organizer Name: </label>
+                <InputText @bind-Value="newTournament.OrganizerName" />
+            </p>
+            <button type="submit" class="btn btn-success">Add</button>
+            <button class="btn btn-secondary" @onclick="HideAddForm">Cancel</button>
+        </EditForm>
+    }
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var tournament in tournaments)
+            {
+                <tr>
+                    <td>
+                        @if (editId == tournament.Id && !showAddForm)
+                        {
+                            <EditForm Model="@editTournament" OnValidSubmit="() => HandleSave(tournament.Id)">
+                                <p>
+                                    <label>Name: </label>
+                                    <InputText @bind-Value="editTournament.Name" />
+                                </p>
+                                <p>
+                                    <label>Start Date: </label>
+                                    <InputDate @bind-Value="editTournament.StartDate" />
+                                </p>
+                                <p>
+                                    <label>End Date: </label>
+                                    <InputDate @bind-Value="editTournament.EndDate" />
+                                </p>
+                                <p>
+                                    <label>Short Description: </label>
+                                    <InputText @bind-Value="editTournament.ShortDesc" />
+                                </p>
+                                <p>
+                                    <label>Long Description: </label>
+                                    <InputTextArea @bind-Value="editTournament.LongDesc" />
+                                </p>
+                                <p>
+                                    <label>Rules: </label>
+                                    <InputTextArea @bind-Value="editTournament.Rules" />
+                                </p>
+                                <p>
+                                    <label>Private: </label>
+                                    <InputCheckbox @bind-Value="editTournament.IsPrivate" />
+                                </p>
+                                <p>
+                                    <label>Open to Cybersportsmen: </label>
+                                    <InputCheckbox @bind-Value="editTournament.IsOpenToCybersportsmen" />
+                                </p>
+                                <p>
+                                    <label>Open to Users: </label>
+                                    <InputCheckbox @bind-Value="editTournament.IsOpenToUsers" />
+                                </p>
+                                <p>
+                                    <label>VAC Banned users allowed: </label>
+                                    <InputCheckbox @bind-Value="editTournament.VACBannedParticipantsAllowed" />
+                                </p>
+                                <p>
+                                    <label>Organizer ID: </label>
+                                    <InputText @bind-Value="editTournament.OrganizerId" />
+                                </p>
+                                <p>
+                                    <label>Organizer Name: </label>
+                                    <InputText @bind-Value="editTournament.OrganizerName" />
+                                </p>
+                                <button type="submit" class="btn btn-success">Save</button>
+                                <button class="btn btn-secondary" @onclick="HideEditForm">Cancel</button>
+                            </EditForm>
+                        }
+                        else
+                        {
+                            @tournament.Name
+                        }
+                    </td>
+                    <td>@tournament.StartDate</td>
+                    <td>@tournament.EndDate</td>
+                    <td>
+                        @if (editId != tournament.Id)
+                        {
+                            <button class="btn btn-info" @onclick="() => ShowEditForm(tournament)">Edit</button>
+                        }
+                        <button class="btn btn-danger mx-2" @onclick="() => DeleteTournament(tournament.Id)">Delete</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<TournamentModel> tournaments;
+    private TournamentModel newTournament = new TournamentModel();
+    private TournamentModel editTournament = new TournamentModel();
+    private bool showAddForm = false;
+    private string editId = string.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
+        tournaments = await TournamentService.GetTournamentsAsync();
+    }
+
+    private void ShowAddForm()
+    {
+        newTournament = new TournamentModel
+        {
+                Id = Guid.NewGuid().ToString()
+        };
+        showAddForm = true;
+    }
+
+    private void HideAddForm()
+    {
+        showAddForm = false;
+    }
+
+    private async Task HandleAdd()
+    {
+        await TournamentService.AddTournamentAsync(newTournament);
+        tournaments = await TournamentService.GetTournamentsAsync();
+        showAddForm = false;
+        NavigationManager.NavigateTo("/tournaments");
+    }
+
+    private void ShowEditForm(TournamentModel tournament)
+    {
+        editId = tournament.Id;
+        editTournament = new TournamentModel
+            {
+                Id = tournament.Id,
+                Name = tournament.Name,
+                StartDate = tournament.StartDate,
+                EndDate = tournament.EndDate,
+                Rules = tournament.Rules,
+                ShortDesc = tournament.ShortDesc,
+                LongDesc = tournament.LongDesc,
+                IsPrivate = tournament.IsPrivate,
+                IsOpenToCybersportsmen = tournament.IsOpenToCybersportsmen,
+                IsOpenToUsers = tournament.IsOpenToUsers,
+                VACBannedParticipantsAllowed = tournament.VACBannedParticipantsAllowed,
+                OrganizerId = tournament.OrganizerId,
+                OrganizerName = tournament.OrganizerName
+            };
+        showAddForm = false; // Ensures add form is hidden when showing edit form
+    }
+
+    private async Task HandleSave(string tournamentId)
+    {
+        await TournamentService.UpdateTournamentAsync(tournamentId, editTournament);
+        var index = tournaments.FindIndex(d => d.Id == tournamentId);
+        if (index != -1)
+        {
+            tournaments[index] = new TournamentModel
+                {
+                    Id = editTournament.Id,
+                    Name = editTournament.Name,
+                    StartDate = editTournament.StartDate,
+                    EndDate = editTournament.EndDate,
+                    Rules = editTournament.Rules,
+                    ShortDesc = editTournament.ShortDesc,
+                    LongDesc = editTournament.LongDesc,
+                    IsPrivate = editTournament.IsPrivate,
+                    IsOpenToCybersportsmen = editTournament.IsOpenToCybersportsmen,
+                    IsOpenToUsers = editTournament.IsOpenToUsers,
+                    VACBannedParticipantsAllowed = editTournament.VACBannedParticipantsAllowed,
+                    OrganizerId = editTournament.OrganizerId,
+                    OrganizerName = editTournament.OrganizerName
+                };
+        }
+        editId = string.Empty;
+    }
+
+    private void HideEditForm()
+    {
+        editId = string.Empty;
+    }
+
+    private async Task DeleteTournament(string tournamentId)
+    {
+        await TournamentService.DeleteTournamentAsync(tournamentId);
+        tournaments.RemoveAll(d => d.Id == tournamentId);
+    }
+}

@@ -1,141 +1,97 @@
-﻿using ChampionshipAssist.Core.Context;
+﻿using ChampionshipAssist.Application.DTOs;
 using ChampionshipAssist.Core.Entities;
+using ChampionshipAssist.Domain.Contracts;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace ChampionshipAssist.WebApp.Controllers
 {
     public class ReviewController : Controller
     {
-        private readonly ChampionshipAssistDbContext _context;
+        private readonly IRepository<Review> reviewRepository;
 
-        public ReviewController(ChampionshipAssistDbContext context)
+        public ReviewController(IRepository<Review> reviewRepository)
         {
-            _context = context;
+            this.reviewRepository = reviewRepository;
+        }
+        public async Task<IActionResult> Index() =>
+        View(await reviewRepository.GetAllEntitiesAsync());
+
+        public async Task<IActionResult> Update(string id)
+        {
+            PopulateDropdowns();
+
+            var review = await reviewRepository.GetEntityByIdAsync(id);
+
+            return View(new ReviewDto
+            {
+                Id = review.Id,
+                UserId = review.UserId
+            });
         }
 
-        // Операція створення
-        public IActionResult Create()
+        public async Task<IActionResult> Delete(string id)
         {
-            return View();
+            var review = await reviewRepository.GetEntityByIdAsync(id);
+
+            return View(new ReviewDto
+            {
+                Id = review.Id,
+                UserId = review.UserId
+            });
         }
+
+        public IActionResult Create() => View();
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Review review)
+        public async Task<IActionResult> Create(ReviewDto dto)
         {
-            if (ModelState.IsValid)
+            if (string.IsNullOrWhiteSpace(dto.UserId.ToString())
+                || string.IsNullOrEmpty(dto.UserId.ToString()))
+                return View(dto);
+
+            await reviewRepository.AddNewEntityAsync(new Review
             {
-                _context.Reviews.Add(review);
-                await _context.SaveChangesAsync();
-                return RedirectToAction("Index");
-            }
-            return View(review);
-        }
+                UserId = dto.UserId
+            });
 
-        // Операція читання (список всіх турнірів)
-        public async Task<IActionResult> Index()
-        {
-            var reviews = await _context.Reviews.ToListAsync();
-            return View(reviews);
-        }
-
-        // Операція читання (інформація про конкретний турнір)
-        public async Task<IActionResult> Details(string? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var review = await _context.Reviews.FirstOrDefaultAsync(t => t.Id == id);
-            if (review == null)
-            {
-                return NotFound();
-            }
-
-            return View(review);
-        }
-
-        // Операція оновлення
-        public async Task<IActionResult> Edit(string? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var review = await _context.Reviews.FirstOrDefaultAsync(t => t.Id == id);
-            if (review == null)
-            {
-                return NotFound();
-            }
-
-            return View(review);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, Review review)
-        {
-            if (id != review.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(review);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ReviewExists(review.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction("Index");
-            }
-            return View(review);
-        }
-
-        // Операція видалення
-        public async Task<IActionResult> Delete(string? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var review = await _context.Reviews.FirstOrDefaultAsync(t => t.Id == id);
-            if (review == null)
-            {
-                return NotFound();
-            }
-
-            return View(review);
-        }
-
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var review = await _context.Reviews.FindAsync(id);
-            _context.Reviews.Remove(review);
-            await _context.SaveChangesAsync();
             return RedirectToAction("Index");
         }
 
-        private bool ReviewExists(string id)
+        [HttpPost]
+        public async Task<IActionResult> Update(ReviewDto dto)
         {
-            return _context.Reviews.Any(t => t.Id == id);
+            if (!ModelState.IsValid)
+                return View(dto);
+
+            var review = await reviewRepository.GetEntityByIdAsync(dto.Id);
+            if (review is null)
+                return NotFound();
+
+            review.UserId = dto.UserId;
+            reviewRepository.UpdateExistingEntity(review);
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(ReviewDto dto)
+        {
+            if (!Guid.TryParse(dto.Id.ToString(), out var id)) return View(dto);
+
+            var review = await reviewRepository.GetEntityByIdAsync(id.ToString());
+            if (review is null)
+                return NotFound();
+
+            reviewRepository.RemoveExistingEntity(review);
+            return RedirectToAction("Index");
+        }
+
+        private void PopulateDropdowns()
+        {
+            ViewData["Tags"] = new SelectList(
+                reviewRepository.GetAllEntities(),
+                nameof(Review.Id),
+                nameof(Review.UserId));
         }
     }
 }

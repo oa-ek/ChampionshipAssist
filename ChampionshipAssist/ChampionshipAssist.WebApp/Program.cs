@@ -1,60 +1,90 @@
+﻿using Azure;
 using ChampionshipAssist.Core.Context;
 using ChampionshipAssist.Core.Entities;
-using ChampionshipAssist.Repositories.Interfaces;
-using ChampionshipAssist.Repositories.Repos;
+using ChampionshipAssist.Domain.Contracts;
+using ChampionshipAssist.Persistence.Repositories;
+using ChampionshipAssist.WebApp.Controllers;
 using ChampionshipAssist.WebApp.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Policy;
+using System.Text.Json.Serialization;
+using static ChampionshipAssist.WebApp.Controllers.ReviewApiController;
 
-var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
-builder.Services.AddDbContext<ChampionshipAssistDbContext>(options =>
-    options.UseSqlServer(connectionString));
-builder.Services.AddDatabaseDeveloperPageExceptionFilter();
-
-builder.Services.AddDefaultIdentity<User>(options =>
+internal class Program
 {
-    options.SignIn.RequireConfirmedAccount = false;
-    options.Password.RequireDigit = false;
-    options.Password.RequireLowercase = false;
-    options.Password.RequireUppercase = false;
-    options.Password.RequireNonAlphanumeric = false;
-    options.Password.RequiredLength = 4;
-}).AddRoles<IdentityRole>()
-    .AddEntityFrameworkStores<ChampionshipAssistDbContext>();
+    private static void Main(string[] args)
+    {
+        var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddScoped<ITournamentRepository, TournamentRepository>();
-builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
+        // Add services to the container.
+        var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+        builder.Services.AddDbContext<ChampionshipAssistDbContext>(options =>
+            options.UseSqlServer(connectionString));
+        builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddControllersWithViews();
+        builder.Services.AddDefaultIdentity<User>(options =>
+        {
+            options.SignIn.RequireConfirmedAccount = false;
+            options.Password.RequireDigit = false;
+            options.Password.RequireLowercase = false;
+            options.Password.RequireUppercase = false;
+            options.Password.RequireNonAlphanumeric = false;
+            options.Password.RequiredLength = 4;
+        }).AddRoles<IdentityRole>()
+            .AddEntityFrameworkStores<ChampionshipAssistDbContext>();
 
-var app = builder.Build();
+        builder.Services.AddControllers().AddJsonOptions(x =>
+            x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseMigrationsEndPoint();
+        builder.Services.AddCors(options =>
+        {
+            options.AddPolicy("ApplicationCorsPolicy", policy =>
+            {
+                policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
+            });
+        });
+
+        AddRepositories(builder);
+
+        builder.Services.AddControllersWithViews();
+
+        // Move the following lines before builder.Build()
+
+        // Configure the HTTP request pipeline.
+        var app = builder.Build();
+        app.UseHttpsRedirection();
+        app.UseStaticFiles();
+
+        app.UseRouting();
+
+        app.UseCors("ApplicationCorsPolicy"); // Enable CORS
+
+        app.UseAuthorization();
+
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapControllers(); // Map API controllers
+
+            endpoints.MapControllerRoute(
+                name: "default",
+                pattern: "{controller=Home}/{action=Index}/{id?}");
+
+            endpoints.MapRazorPages();
+        });
+
+        app.Run();
+    }
+
+    private static void AddRepositories(WebApplicationBuilder builder)
+    {
+        AddRepository<Tournament>(builder);
+        AddRepository<Review>(builder);
+        AddRepository<User>(builder);
+    }
+
+    private static void AddRepository<T>(WebApplicationBuilder builder)
+        where T : class =>
+        builder.Services.AddScoped<IRepository<T>>(provider =>
+            new GenericRepository<T>(provider.GetService<ChampionshipAssistDbContext>()!));
 }
-else
-{
-    app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
-}
-
-app.UseHttpsRedirection();
-app.UseStaticFiles();
-
-app.UseRouting();
-
-app.UseAuthorization();
-
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
-app.MapRazorPages();
-
-app.Run();

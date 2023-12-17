@@ -1,7 +1,7 @@
 using ChampionshipAssistBlazorRepresentation;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
-using ChampionshipAssistBlazorRepresentation.Serivces;
+using ChampionshipAssistBlazorRepresentation.Services;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");

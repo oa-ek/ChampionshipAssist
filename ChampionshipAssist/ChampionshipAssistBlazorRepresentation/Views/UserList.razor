@@ -1,0 +1,228 @@
+﻿@page "/users"
+@using ChampionshipAssistBlazorRepresentation.Application
+@using ChampionshipAssistBlazorRepresentation.Services
+@inject UserService UserService
+@inject NavigationManager NavigationManager
+
+<h3>Users</h3>
+
+@if (users == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <button class="btn btn-primary" @onclick="ShowAddForm">Add User</button>
+
+    @if (showAddForm)
+    {
+        <EditForm Model="@newUser" OnValidSubmit="HandleAdd">
+            <p>
+                <label>Name: </label>
+                <InputText @bind-Value="newUser.Name" />
+            </p>
+            <p>
+                <label>Steam Link: </label>
+                <InputText @bind-Value="newUser.SteamLink" />
+            </p>
+            <p>
+                <label>Documents: </label>
+                <InputText @bind-Value="newUser.Documents" />
+            </p>
+            <p>
+                <label>Bio: </label>
+                <InputText @bind-Value="newUser.Bio" />
+            </p>
+            <p>
+                <label>Is Banned: </label>
+                <InputCheckbox @bind-Value="newUser.IsBanned" />
+            </p>
+            <p>
+                <label>Is VAC Banned: </label>
+                <InputCheckbox @bind-Value="newUser.IsVACBanned" />
+            </p>
+            <p>
+                <label>Ban Duration: </label>
+                <InputDate @bind-Value="newUser.BanDuration" />
+            </p>
+            <p>
+                <label>Ban Count: </label>
+                <InputNumber @bind-Value="newUser.BanCount" />
+            </p>
+            <p>
+                <label>Role: </label>
+                <InputText @bind-Value="newUser.Role" />
+            </p>
+            <button type="submit" class="btn btn-success">Add</button>
+            <button class="btn btn-secondary" @onclick="HideAddForm">Cancel</button>
+        </EditForm>
+    }
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>User ID</th>
+                <th>Name</th>
+                <th>Role</th>
+                <th>Banned</th>
+                <th>VAC Banned</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in users)
+            {
+                <tr>
+                    <td>
+                        @if (editId == user.Id && !showAddForm)
+                        {
+                            <EditForm Model="@editUser" OnValidSubmit="() => HandleSave(user.Id)">
+                                <p>
+                                    <label>Name: </label>
+                                    <InputText @bind-Value="editUser.Name" />
+                                </p>
+                                <p>
+                                    <label>Steam Link: </label>
+                                    <InputText @bind-Value="editUser.SteamLink" />
+                                </p>
+                                <p>
+                                    <label>Documents: </label>
+                                    <InputText @bind-Value="editUser.Documents" />
+                                </p>
+                                <p>
+                                    <label>Bio: </label>
+                                    <InputText @bind-Value="editUser.Bio" />
+                                </p>
+                                <p>
+                                    <label>Is Banned: </label>
+                                    <InputCheckbox @bind-Value="editUser.IsBanned" />
+                                </p>
+                                <p>
+                                    <label>Is VAC Banned: </label>
+                                    <InputCheckbox @bind-Value="editUser.IsVACBanned" />
+                                </p>
+                                <p>
+                                    <label>Ban Duration: </label>
+                                    <InputDate @bind-Value="editUser.BanDuration" />
+                                </p>
+                                <p>
+                                    <label>Ban Count: </label>
+                                    <InputNumber @bind-Value="editUser.BanCount" />
+                                </p>
+                                <p>
+                                    <label>Role: </label>
+                                    <InputNumber @bind-Value="editUser.BanCount" />
+                                </p>
+                                <button type="submit" class="btn btn-success">Save</button>
+                                <button class="btn btn-secondary" @onclick="HideEditForm">Cancel</button>
+                            </EditForm>
+                        }
+                        else
+                        {
+                            @user.Id
+                        }
+                    </td>
+                    <td>@user.Name</td>
+                    <td>@user.Role</td>
+                    <td>@user.IsBanned</td>
+                    <td>@user.IsVACBanned</td>
+                    <td>
+                        @if (editId != user.Id)
+                        {
+                            <button class="btn btn-info" @onclick="() => ShowEditForm(user)">Edit</button>
+                        }
+                        <button class="btn btn-danger mx-2" @onclick="() => DeleteUser(user.Id)">Delete</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<UserModel> users;
+    private UserModel newUser = new UserModel();
+    private UserModel editUser = new UserModel();
+    private bool showAddForm = false;
+    private string editId = string.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
+        users = await UserService.GetUsersAsync();
+    }
+
+    private void ShowAddForm()
+    {
+        newUser = new UserModel
+            {
+                Id = Guid.NewGuid().ToString()
+            };
+        showAddForm = true;
+    }
+
+    private void HideAddForm()
+    {
+        showAddForm = false;
+    }
+
+    private async Task HandleAdd()
+    {
+        await UserService.AddUserAsync(newUser);
+        users = await UserService.GetUsersAsync();
+        showAddForm = false;
+        NavigationManager.NavigateTo("/users");
+    }
+
+    private void ShowEditForm(UserModel user)
+    {
+        editId = user.Id;
+        editUser = new UserModel
+            {
+                Id = user.Id,
+                Name = user.Name,
+                Bio = user.Bio,
+                Documents = user.Documents,
+                SteamLink = user.SteamLink,
+                IsBanned = user.IsBanned,
+                IsVACBanned = user.IsVACBanned,
+                BanDuration = user.BanDuration,
+                BanCount = user.BanCount,
+                Role = user.Role
+            };
+        showAddForm = false; // Ensures add form is hidden when showing edit form
+    }
+
+    private async Task HandleSave(string userId)
+    {
+        await UserService.UpdateUserAsync(userId, editUser);
+        var index = users.FindIndex(u => u.Id == userId);
+        if (index != -1)
+        {
+            users[index] = new UserModel
+                {
+                    Id = editUser.Id,
+                    Name = editUser.Name,
+                    Bio = editUser.Bio,
+                    Documents = editUser.Documents,
+                    SteamLink = editUser.SteamLink,
+                    IsBanned = editUser.IsBanned,
+                    IsVACBanned = editUser.IsVACBanned,
+                    BanDuration = editUser.BanDuration,
+                    BanCount = editUser.BanCount,
+                    Role = editUser.Role
+                };
+        }
+        editId = string.Empty;
+    }
+
+    private void HideEditForm()
+    {
+        editId = string.Empty;
+    }
+
+    private async Task DeleteUser(string userId)
+    {
+        await UserService.DeleteUserAsync(userId);
+        users.RemoveAll(u => u.Id == userId);
+    }
+}

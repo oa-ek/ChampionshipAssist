@@ -1,65 +1,98 @@
-﻿using ChampionshipAssist.Core.Entities;
-using ChampionshipAssist.Repositories.Interfaces;
+﻿using ChampionshipAssist.Application.DTOs;
+using ChampionshipAssist.Core.Entities;
+using ChampionshipAssist.Domain.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace ChampionshipAssist.WebApp.Controllers
 {
     public class TournamentController : Controller
     {
-        private readonly ITournamentRepository tournamentRepository;
-        private readonly IWebHostEnvironment webHostEnvironment;
+        private readonly IRepository<Tournament> tournamentRepository;
 
-        public TournamentController(ITournamentRepository tournamentRepository, IWebHostEnvironment webHostEnvironment)
+        public TournamentController(IRepository<Tournament> tournamentRepository)
         {
             this.tournamentRepository = tournamentRepository;
-            this.webHostEnvironment = webHostEnvironment;
         }
-        public IActionResult Index()
-        {
-            return View(tournamentRepository.GetAll());
-        }
+        public async Task<IActionResult> Index() =>
+        View(await tournamentRepository.GetAllEntitiesAsync());
 
-        [Authorize(Roles = "User")]
-        public IActionResult My()
+        public async Task<IActionResult> Update(string id)
         {
-            return View(tournamentRepository.GetAll(User.Identity.Name));
-        }
+            PopulateDropdowns();
 
-        /*public string Image(int id)
-        {
-            var course = courseRepository.Get(id);
-            return course.CoverPath;
-        }*/
+            var tournament = await tournamentRepository.GetEntityByIdAsync(id);
 
-        [Authorize]
-        public IActionResult Create()
-        {
-            return View(new Tournament());
+            return View(new TournamentDto
+            {
+                Id = tournament.Id,
+                Name = tournament.Name
+            });
         }
 
-        [AllowAnonymous]
-        public IActionResult Create1()
+        public async Task<IActionResult> Delete(string id)
         {
-            return View(new Tournament());
+            var tournament = await tournamentRepository.GetEntityByIdAsync(id);
+
+            return View(new TournamentDto
+            {
+                Id = tournament.Id,
+                Name = tournament.Name
+            });
         }
 
+        public IActionResult Create() => View();
 
         [HttpPost]
-        [Authorize]
-        public IActionResult Create(Tournament model)
+        public async Task<IActionResult> Create(TournamentDto dto)
         {
-            if (ModelState.IsValid)
+            if (string.IsNullOrWhiteSpace(dto.Name)
+                || string.IsNullOrEmpty(dto.Name))
+                return View(dto);
+
+            await tournamentRepository.AddNewEntityAsync(new Tournament
             {
-                tournamentRepository.Add(model, User.Identity.Name);
-                return RedirectToAction(nameof(Index));
-            }
-            return View(model);
+                Name = dto.Name
+            });
+
+            return RedirectToAction("Index");
         }
 
-        public IActionResult Details(string id)
+        [HttpPost]
+        public async Task<IActionResult> Update(TournamentDto dto)
         {
-            return View(tournamentRepository.Get(id));
+            if (!ModelState.IsValid)
+                return View(dto);
+
+            var tournament = await tournamentRepository.GetEntityByIdAsync(dto.Id);
+            if (tournament is null)
+                return NotFound();
+
+            tournament.Name = dto.Name;
+            tournamentRepository.UpdateExistingEntity(tournament);
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(TournamentDto dto)
+        {
+            if (!Guid.TryParse(dto.Id.ToString(), out var id)) return View(dto);
+
+            var tournament = await tournamentRepository.GetEntityByIdAsync(id.ToString());
+            if (tournament is null)
+                return NotFound();
+
+            tournamentRepository.RemoveExistingEntity(tournament);
+            return RedirectToAction("Index");
+        }
+
+        private void PopulateDropdowns()
+        {
+            ViewData["Tags"] = new SelectList(
+                tournamentRepository.GetAllEntities(),
+                nameof(Tournament.Id),
+                nameof(Tournament.Name));
         }
     }
 }

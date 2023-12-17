@@ -1,0 +1,176 @@
+﻿@page "/reviews"
+@using ChampionshipAssistBlazorRepresentation.Application
+@using ChampionshipAssistBlazorRepresentation.Services
+@inject ReviewService ReviewService
+@inject NavigationManager NavigationManager
+
+<h3>Reviews</h3>
+
+@if (reviews == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <button class="btn btn-primary" @onclick="ShowAddForm">Add Review</button>
+
+    @if (showAddForm)
+    {
+        <EditForm Model="@newReview" OnValidSubmit="HandleAdd">
+            <p>
+                <label>Tournament ID: </label>
+                <InputText @bind-Value="newReview.TournamentId" />
+            </p>
+            <p>
+                <label>User ID: </label>
+                <InputText @bind-Value="newReview.UserId" />
+            </p>
+            <p>
+                <label>Commentary: </label>
+                <InputText @bind-Value="newReview.Commentary" />
+            </p>
+            <p>
+                <label>Rating: </label>
+                <InputNumber @bind-Value="newReview.Rating" />
+            </p>
+            <button type="submit" class="btn btn-success">Add</button>
+            <button class="btn btn-secondary" @onclick="HideAddForm">Cancel</button>
+        </EditForm>
+    }
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Tournament ID</th>
+                <th>User ID</th>
+                <th>Commentary</th>
+                <th>Rating</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var review in reviews)
+            {
+                <tr>
+                    <td>
+                        @if (editId == review.Id && !showAddForm)
+                        {
+                            <EditForm Model="@editReview" OnValidSubmit="() => HandleSave(review.Id)">
+                                <p>
+                                    <label>Tournament ID: </label>
+                                    <InputText @bind-Value="editReview.TournamentId" />
+                                </p>
+                                <p>
+                                    <label>User ID: </label>
+                                    <InputText @bind-Value="editReview.UserId" />
+                                </p>
+                                <p>
+                                    <label>Commentary: </label>
+                                    <InputText @bind-Value="editReview.Commentary" />
+                                </p>
+                                <p>
+                                    <label>Rating: </label>
+                                    <InputNumber @bind-Value="editReview.Rating" />
+                                </p>
+                                <button type="submit" class="btn btn-success">Save</button>
+                                <button class="btn btn-secondary" @onclick="HideEditForm">Cancel</button>
+                            </EditForm>
+                        }
+                        else
+                        {
+                            @review.TournamentId
+                        }
+                    </td>
+                    <td>@review.UserId</td>
+                    <td>@review.Commentary</td>
+                    <td>@review.Rating</td>
+                    <td>
+                        @if (editId != review.Id)
+                        {
+                            <button class="btn btn-info" @onclick="() => ShowEditForm(review)">Edit</button>
+                        }
+                        <button class="btn btn-danger mx-2" @onclick="() => DeleteReview(review.Id)">Delete</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<ReviewModel> reviews;
+    private ReviewModel newReview = new ReviewModel();
+    private ReviewModel editReview = new ReviewModel();
+    private bool showAddForm = false;
+    private string editId = Guid.Empty.ToString();
+
+    protected override async Task OnInitializedAsync()
+    {
+        reviews = await ReviewService.GetReviewsAsync();
+    }
+
+    private void ShowAddForm()
+    {
+        newReview = new ReviewModel
+            {
+                Id = Guid.NewGuid().ToString()
+            };
+        showAddForm = true;
+    }
+
+    private void HideAddForm()
+    {
+        showAddForm = false;
+    }
+
+    private async Task HandleAdd()
+    {
+        await ReviewService.AddReviewAsync(newReview);
+        reviews = await ReviewService.GetReviewsAsync();
+        showAddForm = false;
+        NavigationManager.NavigateTo("/reviews");
+    }
+
+    private void ShowEditForm(ReviewModel review)
+    {
+        editId = review.Id;
+        editReview = new ReviewModel
+            {
+                Id = review.Id,
+                TournamentId = review.TournamentId,
+                UserId = review.UserId,
+                Commentary = review.Commentary,
+                Rating = review.Rating
+            };
+        showAddForm = false; // Ensures add form is hidden when showing edit form
+    }
+
+    private async Task HandleSave(string reviewId)
+    {
+        await ReviewService.UpdateReviewAsync(reviewId, editReview);
+        var index = reviews.FindIndex(d => d.Id == reviewId);
+        if (index != -1)
+        {
+            reviews[index] = new ReviewModel
+                {
+                    Id = editReview.Id,
+                    TournamentId = editReview.TournamentId,
+                    UserId = editReview.UserId,
+                    Commentary = editReview.Commentary,
+                    Rating = editReview.Rating
+                };
+        }
+        editId = Guid.Empty.ToString();
+    }
+
+    private void HideEditForm()
+    {
+        editId = Guid.Empty.ToString();
+    }
+
+    private async Task DeleteReview(string reviewId)
+    {
+        await ReviewService.DeleteReviewAsync(reviewId);
+        reviews.RemoveAll(d => d.Id == reviewId);
+    }
+}

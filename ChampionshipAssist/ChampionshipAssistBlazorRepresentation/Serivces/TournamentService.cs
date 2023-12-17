@@ -1,47 +1,47 @@
-﻿using ChampionshipAssist.Application;
+﻿using ChampionshipAssistBlazorRepresentation.Application;
 using System.Net.Http.Json;
 
-namespace ChampionshipAssistBlazorRepresentation.Serivces
+namespace ChampionshipAssistBlazorRepresentation.Services
 {
 	public class TournamentService
 	{
 			private readonly HttpClient _httpClient;
-			private const string ApiUrl = "https://localhost:8001";
+			private const string ApiUrl = "https://localhost:7088";
 
 			public TournamentService(HttpClient httpClient)
 			{
 				_httpClient = httpClient;
 			}
 
-			public async Task<List<Tournament>> GetTournamentsAsync()
+			public async Task<List<TournamentModel>> GetTournamentsAsync()
 			{
 				var items = await _httpClient.GetAsync(ApiUrl + "/api/TournamentApi");
-				return (await items.Content.ReadFromJsonAsync<List<Tournament>>())!;
+				return (await items.Content.ReadFromJsonAsync<List<TournamentModel>>())!;
 			}
 
-			public async Task<Tournament> GetTournamentByIdAsync(Guid id)
+			public async Task<TournamentModel> GetTournamentByIdAsync(Guid id)
 			{
 				var item = await _httpClient.GetAsync(ApiUrl + $"/api/TournamentApi/{id}");
-				return (await item.Content.ReadFromJsonAsync<Tournament>())!;
+				return (await item.Content.ReadFromJsonAsync<TournamentModel>())!;
 			}
 
-			public async Task<Tournament> AddTournamentAsync(Tournament tournament)
+			public async Task<TournamentModel> AddTournamentAsync(TournamentModel tournament)
 			{
 				var response = await _httpClient.PostAsJsonAsync(ApiUrl + $"/api/TournamentApi", tournament);
 				response.EnsureSuccessStatusCode();
 
-				return (await response.Content.ReadFromJsonAsync<Tournament>())!;
+				return (await response.Content.ReadFromJsonAsync<TournamentModel>())!;
 			}
 
-			public async Task UpdateTournamentAsync(Guid id, Tournament tournament)
+			public async Task UpdateTournamentAsync(string id, TournamentModel tournament)
 			{
 				var response = await _httpClient.PutAsJsonAsync(ApiUrl + $"/api/TournamentApi/{id}", tournament);
 				response.EnsureSuccessStatusCode();
 			}
 
-			public async Task DeleteTournamentAsync(Guid id)
+			public async Task DeleteTournamentAsync(string id)
 			{
-				var response = await _httpClient.DeleteAsync(ApiUrl + $"/api/TournamentApi/{id.ToString()}");
+				var response = await _httpClient.DeleteAsync(ApiUrl + $"/api/TournamentApi/{id}");
 				response.EnsureSuccessStatusCode();
 			}
 	}

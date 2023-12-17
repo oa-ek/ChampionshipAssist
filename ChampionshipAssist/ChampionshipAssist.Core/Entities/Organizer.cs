@@ -2,7 +2,7 @@
 {
     public class Organizer : User
     {
-        public List<Tournament> CreatedTournaments { get; set; }
+        public List<Tournament>? CreatedTournaments { get; set; }
 
         public void CreateTournament(string name, DateTime startDate, DateTime endDate, string organizerId, string rules, bool isOpenToUsers, bool isOpenToCybersportsmen, bool isPrivate, bool vBannedParticipantsAllowed)
         {

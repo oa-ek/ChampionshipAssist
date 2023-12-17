@@ -142,6 +142,7 @@ namespace ChampionshipAssist.Core.Context
                 IsVACBanned = true,
                 BanDuration = DateTime.Now,
                 BanCount = 1,
+                Role = "User",
                 EmailConfirmed = true,
                 NormalizedEmail = "USER@EXAMPLE.COM",
                 NormalizedUserName = "BUDDING"
@@ -158,6 +159,7 @@ namespace ChampionshipAssist.Core.Context
                 IsVACBanned = false,
                 BanDuration = DateTime.Now,
                 BanCount = 0,
+                Role = "Cybersportsman",
                 EmailConfirmed = true,
                 NormalizedEmail = "CYBER@EXAMPLE.COM",
                 NormalizedUserName = "GABE"
@@ -174,6 +176,7 @@ namespace ChampionshipAssist.Core.Context
                 IsVACBanned = false,
                 BanDuration = DateTime.Now,
                 BanCount = 0,
+                Role = "Admin",
                 EmailConfirmed = true,
                 NormalizedEmail = "ADMIN@EXAMPLE.COM",
                 NormalizedUserName = "ZATEBON"

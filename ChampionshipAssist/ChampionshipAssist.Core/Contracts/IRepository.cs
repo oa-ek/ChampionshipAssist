@@ -14,7 +14,7 @@ namespace ChampionshipAssist.Domain.Contracts
 			GetAllEntitiesAsync().GetAwaiter().GetResult();
 
 		public Task<List<TEntity>> GetAllEntitiesAsync();
-		public Task<TEntity?> GetEntityByIdAsync(Guid id);
+		public Task<TEntity?> GetEntityByIdAsync(string id);
 		public Task AddNewEntityAsync(TEntity entity);
 		public void UpdateExistingEntity(TEntity updatedEntity);
 		public void RemoveExistingEntity(TEntity removedEntity);

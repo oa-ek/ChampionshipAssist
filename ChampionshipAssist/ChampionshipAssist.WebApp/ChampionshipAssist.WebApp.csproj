@@ -22,7 +22,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ChampionshipAssist.Repositories\ChampionshipAssist.Repositories.csproj" />
+    <ProjectReference Include="..\ChampionshipAssist.Application\ChampionshipAssist.Application.csproj" />
+    <ProjectReference Include="..\ChampionshipAssist.Persistence\ChampionshipAssist.Persistence.csproj" />
   </ItemGroup>
 
 </Project>
