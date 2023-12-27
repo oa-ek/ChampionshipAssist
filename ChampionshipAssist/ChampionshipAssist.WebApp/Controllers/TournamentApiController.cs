@@ -91,7 +91,7 @@ namespace ChampionshipAssist.WebApp.Controllers
             tournament.OrganizerId = tournamentDto.OrganizerId;
             tournament.OrganizerName = tournamentDto.OrganizerName;
 
-            _tournamentRepository.UpdateExistingEntity(tournament);
+            await _tournamentRepository.UpdateExistingEntityAsync(tournament);
 
             return Ok(tournament);
         }
@@ -104,7 +104,7 @@ namespace ChampionshipAssist.WebApp.Controllers
             if (tournament == null)
                 return NotFound();
 
-            _tournamentRepository.RemoveExistingEntity(tournament);
+            await _tournamentRepository.RemoveExistingEntityAsync(tournament);
             return NoContent();
         }
     }

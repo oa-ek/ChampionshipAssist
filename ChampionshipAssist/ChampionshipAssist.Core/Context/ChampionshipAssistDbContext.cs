@@ -26,10 +26,10 @@ namespace ChampionshipAssist.Core.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
             modelBuilder.Entity<Tournament>()
                 .HasMany(x => x.Reviews)
-                .WithOne(x => x.Tournament).OnDelete(DeleteBehavior.NoAction);
+                .WithOne(x => x.Tournament)
+                .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<Tournament>()
                 .HasMany(x => x.Participants)

@@ -1,5 +1,82 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@using ChampionshipAssist.Core.Entities
+@using ChampionshipAssist.Domain.Contracts
+@using Microsoft.AspNetCore.Components
+@using System.Security.Claims
+
+@model User
+
 @{
+    ViewData["Title"] = "User Details";
 }
+
+@inject IRepository<User> UserRepository
+@inject NavigationManager NavigationManager
+@{
+    User currentUser = GetUserById(@User.FindFirstValue(ClaimTypes.NameIdentifier));
+
+    User GetUserById(string userId)
+    {
+        return UserRepository.GetEntityByIdAsync(userId).Result;
+    }
+}
+
+<style>
+    .button-container form {
+        display: inline-block;
+        margin-right: 10px;
+    }
+</style>
+
+<h1>User Details</h1>
+<hr />
+
+<div class="row">
+    <div class="col-2">Name:</div>
+    <div class="col-10"><strong>@Model.Name</strong></div>
+</div>
+
+<div class="row">
+    <div class="col-2">Bio:</div>
+</div>
+
+<div class="row">
+    <div class="col-2">@Model.Bio</div>
+</div>
+
+<hr />
+<div class="row">
+    <div class="col-2">Steam Profile:</div>
+    <div class="col-10"><a href="@Model.SteamLink" target="_blank">@Model.SteamLink</a></div>
+</div>
+
+<div class="row">
+    <div class="col-2">Documents:</div>
+    <div class="col-10">@Model.Documents</div>
+</div>
+
+<div class="row">
+    <div class="col-2">Ban Status:</div>
+    <div class="col-10">@Model.IsBanned</div>
+</div>
+
+<div class="row">
+    <div class="col-2">VAC Ban Status:</div>
+    <div class="col-10">@Model.IsVACBanned</div>
+</div>
+
+<div class="row">
+    <div class="col-2">Role:</div>
+    <div class="col-10">@Model.Role</div>
+</div>
+
+<hr />
+<div class="button-container">
+    @if (currentUser.Role == "Admin" || currentUser.Id == Model.Id)
+    {
+        <form method="post" action="/User/Edit/@Model.Id">
+            <input type="hidden" name="userId" value="@Model.Id" />
+            <button type="submit" class="btn btn-warning">Edit</button>
+        </form>
+    }
+</div>
+<hr />

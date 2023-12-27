@@ -1,4 +1,7 @@
 ﻿﻿@using ChampionshipAssist.Core.Entities
+@using ChampionshipAssist.Domain.Contracts
+@using Microsoft.AspNetCore.Components
+@using System.Security.Claims
 
 @model Tournament
 
@@ -6,33 +9,158 @@
     ViewData["Title"] = Model.Name;
 }
 
-<h1>Детальна інформація про турнір</h1>
+@inject IRepository<Tournament> TournamentRepository
+@inject IRepository<Review> ReviewRepository
+@inject IRepository<User> UserRepository
+@inject NavigationManager NavigationManager
+@{
+    string tournamentId = Model.Id;
+    Tournament tournament = null;
+    List<Review> reviews = new List<Review>();
+    Review newReview = new Review();
+    DateTime currentDate = DateTime.Now;
+    User currentUser = GetUserById(@User.FindFirstValue(ClaimTypes.NameIdentifier));
+
+    async Task LoadData()
+    {
+        tournament = TournamentRepository.GetEntityByIdAsync(tournamentId).Result;
+        reviews = await LoadReviews(tournamentId);
+    }
+
+    async Task<List<Review>> LoadReviews(string tournamentId)
+    {
+        var reviews = await ReviewRepository.GetEntitiesByPropertyAsync("TournamentId", tournamentId);
+
+        return reviews ?? new List<Review>();
+    }
+
+    User GetUserById(string userId)
+    {
+        return UserRepository.GetEntityByIdAsync(userId).Result;
+    }
+
+    await LoadData();
+}
+
+<style>
+    .button-container form {
+        display: inline-block; /* Make forms inline */
+        margin-right: 10px; /* Adjust spacing between buttons */
+    }
+</style>
+
+<h1>Detailed information:</h1>
 <hr />
 
 <div class="row">
-    <div class="col-2">Назва:</div>
+    <div class="col-2">Name:</div>
     <div class="col-10"><strong>@Model.Name</strong></div>
 </div>
-<hr />
-<div class="row">
-    <div class="col-2">Короткий опис:</div>
-    <div class="col-4">@Model.ShortDesc</div>
 
-    <div class="col-2">Детальний опис:</div>
-    <div class="col-4">@Model.LongDesc</div>
+<div class="row">
+    <div class="col-2">Game:</div>
+    <div class="col-10"><strong>@Model.Game</strong></div>
+</div>
+
+@{
+    var u = GetUserById(@User.FindFirstValue(ClaimTypes.NameIdentifier));
+    var uName = u?.Name ?? "Unknown User";
+}
+
+<div class="row">
+    <div class="col-2">OrganizerName:</div>
+    <div class="col-10"><strong>@uName</strong></div>
 </div>
 
 <div class="row">
-    <div class="col-2">Правила турніру:</div>
-    <div class="col-10">@Model.Rules</div>
+    <div class="col-2">Detailed description:</div>
+    <div class="col-2">@Model.LongDesc</div>
 </div>
-<hr />
-<h3>Інформація про учасників:</h3>
 
 <div class="row">
-    @foreach (var s in Model.Participants)
+    <div class="col-2">Rules:</div>
+    <div class="col-2">@Model.Rules</div>
+</div>
+
+<div class="row">
+    <div class="col-2">Starts at:</div>
+    <div class="col-10">@Model.StartDate</div>
+</div>
+
+<div class="row">
+    <div class="col-2">Ends at:</div>
+    <div class="col-10">@Model.EndDate</div>
+</div>
+
+<hr />
+<div class="button-container">
+    @if (currentUser.Role == "Admin" || currentUser.Id == Model.OrganizerId)
     {
-        <div class="col-12"><span class="badge bg-danger">@s.Name</span> 
-        </div>
+        <form method="post" action="/Tournament/Delete/@tournamentId">
+            <input type="hidden" name="tournamentId" value="@tournamentId" />
+            <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
     }
+
+    @if (currentUser.Role == "Admin" || currentUser.Id == Model.OrganizerId)
+    {
+        <form method="post" action="/Tournament/Edit/@tournamentId">
+            <input type="hidden" name="tournamentId" value="@tournamentId" />
+            <button type="submit" class="btn btn-warning">Edit</button>
+        </form>
+    }
+</div>
+
+@if (Model.StartDate <= currentDate && !currentUser.IsBanned && !currentUser.IsVACBanned)
+{
+    <form method="post" action="/Tournament/Participate">
+        <input type="hidden" name="tournamentId" value="@tournamentId" />
+        <input type="hidden" name="userId" value="@User.FindFirstValue(ClaimTypes.NameIdentifier)" />
+        <button type="submit" class="btn btn-primary">Participate</button>
+    </form>
+}
+
+<hr />
+<h3>Reviews:</h3>
+@foreach (var review in reviews)
+{
+    <div>
+        <strong>Rating:</strong> @review.Rating<br />
+        <strong>Commentary:</strong> @review.Commentary<br />
+
+        @{
+            var user = GetUserById(review.UserId);
+            var userName = user?.Name ?? "Unknown User";
+        }
+        <strong>User:</strong> @userName<br />
+        <br />
+    </div>
+}
+
+<hr />
+<h3>Write a Review:</h3>
+
+<div class="col-md-6 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <form class="forms-sample" method="post" action="/Review/Create">
+                <div class="mb-3">
+                    <label for="rating" class="form-label">Your Rating:</label>
+                    <input type="number" id="rating" name="Rating" min="1" max="5" required class="form-control" />
+                </div>
+
+                <div class="mb-3">
+                    <label for="commentary" class="form-label">Your Comment:</label>
+                    <textarea id="commentary" name="Commentary" required class="form-control"></textarea>
+                </div>
+
+                <input type="hidden" name="Id" value="@Guid.NewGuid().ToString()" />
+                <input type="hidden" name="TournamentId" value="@tournamentId" />
+                <input type="hidden" name="UserId" value="@User.FindFirstValue(ClaimTypes.NameIdentifier)" />
+
+                <button type="submit" class="btn btn-primary">Submit Review</button>
+                <hr />
+            </form>
+        </div>
+    </div>
 </div>

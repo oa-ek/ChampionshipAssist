@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ChampionshipAssist.Core.Entities;
 
 namespace ChampionshipAssist.Domain.Contracts
 {
@@ -15,8 +11,9 @@ namespace ChampionshipAssist.Domain.Contracts
 
 		public Task<List<TEntity>> GetAllEntitiesAsync();
 		public Task<TEntity?> GetEntityByIdAsync(string id);
-		public Task AddNewEntityAsync(TEntity entity);
-		public void UpdateExistingEntity(TEntity updatedEntity);
-		public void RemoveExistingEntity(TEntity removedEntity);
-	}
+        public Task<List<TEntity>> GetEntitiesByPropertyAsync(string propertyName, string propertyValue); // Add this method
+        public Task AddNewEntityAsync(TEntity entity);
+        public Task UpdateExistingEntityAsync(TEntity updatedEntity);
+        public Task RemoveExistingEntityAsync(TEntity removedEntity);
+    }
 }

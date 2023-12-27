@@ -5,7 +5,6 @@ namespace ChampionshipAssist.Core.Entities
     public class Tournament : BaseEntity
     {
         public string? Name { get; set; } // Назва
-        public string? WinnerId { get; set; } // Ідентифікатор переможця
         public DateTime? StartDate { get; set; } // Дата початку
         public DateTime? EndDate { get; set; } // Дата кінця
         public string? Game { get; set; } // Гра

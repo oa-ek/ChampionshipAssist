@@ -26,7 +26,10 @@ namespace ChampionshipAssist.WebApp.Controllers
             return View(new ReviewDto
             {
                 Id = review.Id,
-                UserId = review.UserId
+                TournamentId = review.TournamentId,
+                UserId = review.UserId,
+                Rating = review.Rating,
+                Commentary = review.Commentary
             });
         }
 
@@ -37,7 +40,10 @@ namespace ChampionshipAssist.WebApp.Controllers
             return View(new ReviewDto
             {
                 Id = review.Id,
-                UserId = review.UserId
+                TournamentId = review.TournamentId,
+                UserId = review.UserId,
+                Rating = review.Rating,
+                Commentary = review.Commentary
             });
         }
 
@@ -52,10 +58,14 @@ namespace ChampionshipAssist.WebApp.Controllers
 
             await reviewRepository.AddNewEntityAsync(new Review
             {
-                UserId = dto.UserId
+                Id = Guid.NewGuid().ToString(),
+                TournamentId = dto.TournamentId,
+                UserId = dto.UserId,
+                Rating = dto.Rating,
+                Commentary = dto.Commentary
             });
 
-            return RedirectToAction("Index");
+            return RedirectToPage("/Tournament/Details", new { id = dto.TournamentId });
         }
 
         [HttpPost]
@@ -69,8 +79,8 @@ namespace ChampionshipAssist.WebApp.Controllers
                 return NotFound();
 
             review.UserId = dto.UserId;
-            reviewRepository.UpdateExistingEntity(review);
-            return RedirectToAction("Index");
+            await reviewRepository.UpdateExistingEntityAsync(review);
+            return RedirectToPage("/Tournament/Details", new { id = dto.TournamentId });
         }
 
         [HttpPost]
@@ -82,8 +92,8 @@ namespace ChampionshipAssist.WebApp.Controllers
             if (review is null)
                 return NotFound();
 
-            reviewRepository.RemoveExistingEntity(review);
-            return RedirectToAction("Index");
+            await reviewRepository.RemoveExistingEntityAsync(review);
+            return RedirectToPage("/Tournament/Details", new { id = dto.TournamentId });
         }
 
         private void PopulateDropdowns()
@@ -91,7 +101,7 @@ namespace ChampionshipAssist.WebApp.Controllers
             ViewData["Tags"] = new SelectList(
                 reviewRepository.GetAllEntities(),
                 nameof(Review.Id),
-                nameof(Review.UserId));
+                nameof(Review.TournamentId));
         }
     }
 }

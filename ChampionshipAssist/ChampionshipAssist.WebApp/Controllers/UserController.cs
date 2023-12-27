@@ -9,7 +9,6 @@ using System.Text.RegularExpressions;
 
 namespace ChampionshipAssist.WebApp.Controllers
 {
-    [Authorize(Roles = "Administrator")]
     public sealed partial class UserController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -27,6 +26,19 @@ namespace ChampionshipAssist.WebApp.Controllers
 
         public async Task<IActionResult> Index() =>
             View(await _usersRepository.GetAllEntitiesAsync());
+
+        public async Task<IActionResult> Details(string id)
+        {
+            var user = await _usersRepository.GetEntityByIdAsync(id);
+
+            if (user == null)
+            {
+                // Log or handle the case where the tournament is not found
+                return NotFound();
+            }
+
+            return View(user);
+        }
 
         public IActionResult Create()
         {

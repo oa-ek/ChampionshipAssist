@@ -45,6 +45,8 @@ internal class Program
             });
         });
 
+        builder.Services.AddRazorPages();
+
         AddRepositories(builder);
 
         builder.Services.AddControllersWithViews();

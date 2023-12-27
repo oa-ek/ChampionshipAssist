@@ -99,7 +99,6 @@ namespace ChampionshipAssist.Core.Context
                     Id = tID3,
                     Name = "ChampionshipAssist test tournament",
                     OrganizerId = uID3,
-                    WinnerId = uID3,
                     StartDate = DateTime.Now,
                     EndDate = DateTime.Now.AddMinutes(1),
                     Game = "Counter-Strike 1.6",

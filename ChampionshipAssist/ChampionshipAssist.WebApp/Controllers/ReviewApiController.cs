@@ -73,7 +73,7 @@ namespace ChampionshipAssist.WebApp.Controllers
             review.Rating = reviewDto.Rating;
             review.Commentary = reviewDto.Commentary;
 
-            _reviewRepository.UpdateExistingEntity(review);
+            await _reviewRepository.UpdateExistingEntityAsync(review);
 
             return Ok(review);
         }
@@ -86,7 +86,7 @@ namespace ChampionshipAssist.WebApp.Controllers
 				if (review == null)
 					return NotFound();
 
-				_reviewRepository.RemoveExistingEntity(review);
+                await _reviewRepository.RemoveExistingEntityAsync(review);
 				return NoContent();
 			}
 		}

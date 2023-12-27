@@ -54,6 +54,7 @@ namespace ChampionshipAssist.WebApp.Controllers
                 SteamLink = userDto.SteamLink,
                 Documents = userDto.Documents,
                 Bio = userDto.Bio,
+                Role = userDto.Role,
                 IsBanned = userDto.IsBanned,
                 IsVACBanned = userDto.IsVACBanned,
                 BanDuration = userDto.BanDuration,
@@ -68,8 +69,8 @@ namespace ChampionshipAssist.WebApp.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(string id, [FromBody] UserDto userDto)
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
+            //if (!ModelState.IsValid)
+            //    return BadRequest(ModelState);
 
             var user = await _userRepository.GetEntityByIdAsync(id);
             if (user == null)
@@ -79,12 +80,13 @@ namespace ChampionshipAssist.WebApp.Controllers
             user.SteamLink = userDto.SteamLink;
             user.Documents = userDto.Documents;
             user.Bio = userDto.Bio;
+            user.Role = userDto.Role;
             user.IsBanned = userDto.IsBanned;
             user.IsVACBanned = userDto.IsVACBanned;
             user.BanDuration = userDto.BanDuration;
             user.BanCount = userDto.BanCount;
 
-            _userRepository.UpdateExistingEntity(user);
+            await _userRepository.UpdateExistingEntityAsync(user);
 
             return Ok(user);
         }
@@ -97,7 +99,7 @@ namespace ChampionshipAssist.WebApp.Controllers
             if (user == null)
                 return NotFound();
 
-            _userRepository.RemoveExistingEntity(user);
+            await _userRepository.RemoveExistingEntityAsync(user);
             return NoContent();
         }
     }
